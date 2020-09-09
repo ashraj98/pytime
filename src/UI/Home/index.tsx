@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory} from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
+import './index.scss';
 
 function Home() {
 
@@ -9,7 +10,8 @@ function Home() {
   return (
     <div className="intro">
       <h1 className="logo">
-          <img className="pie" alt="pie" src="https://www.pngarts.com/files/5/Apple-Pie-PNG-Image-Transparent-Background.png"/> Pytime
+          <img className="pie" alt="pie" src="https://www.pngarts.com/files/5/Apple-Pie-PNG-Image-Transparent-Background.png"/>
+          &nbsp; Pytime
       </h1>
       <h2>Discover new video games in seconds</h2>
       <SearchBar
