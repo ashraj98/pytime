@@ -14,7 +14,9 @@ import {
 function Recommendations() {
     return (
         <div className="Recommendations">
-            
+            <header className="Recommendations-header">
+                
+            </header>
         </div>
     );
 }
