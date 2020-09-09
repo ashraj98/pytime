@@ -1,0 +1,32 @@
+.intro {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+
+h2 {
+    font-family: Cuprum;
+    margin: 50px;
+    color:white;
+}
+
+
+.logo {
+    font-family: Cuprum;
+    margin: 100px 0px 0px 0px;
+    cursor: default;
+    position: relative;
+    color:white;
+    display: flex;
+    align-items: center;
+
+}
+
+.pie {
+    height: 100px;
+    width: 100px;
+}
