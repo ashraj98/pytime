@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -13,10 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import skyrimCover from '../../GamePhotos/skyrimCover.png';
-import myLittlePonyCover from '../../GamePhotos/MyLittlePonyCover.jpg';
-import witcherCover from '../../GamePhotos/witcherCover.jpg';
-import zeldaCover from '../../GamePhotos/ZeldaCover.jpg';
+import skyrimCover from '../../images/skyrimCover.png';
+import myLittlePonyCover from '../../images/MyLittlePonyCover.jpg';
+import witcherCover from '../../images/witcherCover.jpg';
+import zeldaCover from '../../images/ZeldaCover.jpg';
 
 function Copyright() {
   return (

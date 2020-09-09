@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import {Switch, Route, useHistory, Redirect} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import './App.scss';
-import SearchBar from "material-ui-search-bar";
-import Recommendations from "./UI/Recommendations";
-import Home from "./UI/Home";
+import Recommendations from "./ui/recommendations";
+import Home from "./ui/home";
 
 
 function App() {
