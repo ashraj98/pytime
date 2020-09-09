@@ -13,14 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import skyrimCover from '../GamePhotos/skyrimCover.png';
-import skyrimHorse from '../GamePhotos/skyrimHorse.jpg';
-import myLittlePonyCover from '../GamePhotos/MyLittlePonyCover.jpg';
-import myLittlePonyHorse from '../GamePhotos/myLittlePonyHorse.jpg';
-import witcherCover from '../GamePhotos/witcherCover.jpg';
-import witcherHorse from '../GamePhotos/witcherHorse.jpg';
-import zeldaCover from '../GamePhotos/ZeldaCover.jpg';
-import zeldaHorse from '../GamePhotos/zeldaHorse.jpg';
+import skyrimCover from '../../GamePhotos/skyrimCover.png';
+import myLittlePonyCover from '../../GamePhotos/MyLittlePonyCover.jpg';
+import witcherCover from '../../GamePhotos/witcherCover.jpg';
+import zeldaCover from '../../GamePhotos/ZeldaCover.jpg';
 
 function Copyright() {
   return (
@@ -66,9 +62,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
   },
 }));
-
-const cards = [1, 2, 3, 4];
-
 
 export default function Album() {
   const classes = useStyles();
