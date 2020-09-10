@@ -12,6 +12,8 @@ import myLittlePonyHorse from '../../images/myLittlePonyHorse.jpg';
 import skyrimHorse from '../../images/skyrimHorse.jpg';
 import witcherHorse from '../../images/WitcherHorse.jpg';
 import zeldaHorse from '../../images/ZeldaHorse.jpg';
+import { Link } from "react-router-dom";
+import './index.scss';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -83,9 +85,7 @@ export default function Album() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
+                  <Link to="/game/the-elder-scrolls-v-skyrim">View</Link>
                 </CardActions>
               </Card>
             </Grid>
@@ -107,9 +107,7 @@ export default function Album() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
+                  <Link to="/game/the-witcher-3-wild-hunt">View</Link>
                 </CardActions>
               </Card>
             </Grid>
@@ -131,9 +129,7 @@ export default function Album() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
+                  <Link to="/game/my-little-pony-magic-princess">View</Link>
                 </CardActions>
               </Card>
             </Grid>
@@ -155,9 +151,7 @@ export default function Album() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
+                  <Link to="/game/the-legend-of-zelda-breath-of-the-wild">View</Link>
                 </CardActions>
               </Card>
             </Grid>
