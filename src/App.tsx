@@ -5,6 +5,7 @@ import './App.scss';
 import { DefaultLayout } from './ui/layouts';
 import Recommendations from "./ui/recommendations";
 import Home from "./ui/home";
+import SingleGame from './ui/singleGame';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route exact path="/recommendations">
             <Recommendations/>
+          </Route>
+          <Route exact path="/game/:slug">
+            <SingleGame/>
           </Route>
         </Switch>
 
