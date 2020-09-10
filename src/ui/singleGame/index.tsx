@@ -43,12 +43,14 @@ function SingleGame() {
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>
-            <ReactPlayer
-              url={game.clip.clips['640']}
-              playing loop muted
-              volume={0}
-              width="100%"
-            />
+            { game.clip && (
+              <ReactPlayer
+                url={game.clip.clips['640']}
+                playing loop muted
+                volume={0}
+                width="100%"
+              />
+            )}
             <GridList cellHeight={160} cols={2}>
               {game.short_screenshots.map((s: any) => (
                 <GridListTile key={s.id} cols={1}>
