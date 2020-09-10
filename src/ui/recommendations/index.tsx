@@ -8,10 +8,10 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import myLittlePonyCover from '../../images/MyLittlePonyCover.jpg';
-import skyrimCover from '../../images/skyrimCover.png';
-import witcherCover from '../../images/witcherCover.jpg';
-import zeldaCover from '../../images/ZeldaCover.jpg';
+import myLittlePonyHorse from '../../images/myLittlePonyHorse.jpg';
+import skyrimHorse from '../../images/skyrimHorse.jpg';
+import witcherHorse from '../../images/WitcherHorse.jpg';
+import zeldaHorse from '../../images/ZeldaHorse.jpg';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -71,7 +71,7 @@ export default function Album() {
                   component="img"
                   alt="Contemplative Reptile"
                   height="300"
-                  image={skyrimCover}
+                  image={skyrimHorse}
                   title="Skyrim"
                 />
                 <CardContent className={classes.cardContent}>
@@ -79,7 +79,7 @@ export default function Album() {
                     Skyrim: Elder Scolls V
                   </Typography>
                   <Typography>
-                    Action Packed!
+                    Skyrim: Elder Scolls V
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -95,7 +95,7 @@ export default function Album() {
                   component="img"
                   alt="Contemplative Reptile"
                   height="300"
-                  image={witcherCover}
+                  image={witcherHorse}
                   title="The Witcher 3"
                 />
                 <CardContent className={classes.cardContent}>
@@ -103,7 +103,7 @@ export default function Album() {
                     The Witcher 3: Wild Hunt
                   </Typography>
                   <Typography>
-                    YESSSSSSSS
+                    The Witcher 3: Wild Hunt
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -119,7 +119,7 @@ export default function Album() {
                   component="img"
                   alt="Contemplative Reptile"
                   height="300"
-                  image={myLittlePonyCover}
+                  image={myLittlePonyHorse}
                   title="My Little Pony"
                 />
                 <CardContent className={classes.cardContent}>
@@ -127,7 +127,7 @@ export default function Album() {
                     My Little Pony
                   </Typography>
                   <Typography>
-                    NEYYYYYY
+                    My Little Pony
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -143,7 +143,7 @@ export default function Album() {
                   component="img"
                   alt="Contemplative Reptile"
                   height="300"
-                  image={zeldaCover}
+                  image={zeldaHorse}
                   title="Breath of the Wild"
                 />
                 <CardContent className={classes.cardContent}>
@@ -151,7 +151,7 @@ export default function Album() {
                     The Legend of Zelda: Breath of the Wild
                   </Typography>
                   <Typography>
-                    RIDEEEEEEE
+                    The Legend of Zelda: Breath of the Wild
                   </Typography>
                 </CardContent>
                 <CardActions>
