@@ -1,4 +1,3 @@
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -77,11 +76,11 @@ export default function Album() {
                   title="Skyrim"
                 />
                 <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h6" component="h3">
                     Skyrim: Elder Scolls V
                   </Typography>
                   <Typography>
-                    Skyrim: Elder Scolls V
+                    The fifth game in the series, Skyrim takes us on a journey through the coldest region of Cyrodiil.
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -99,11 +98,11 @@ export default function Album() {
                   title="The Witcher 3"
                 />
                 <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h6" component="h3">
                     The Witcher 3: Wild Hunt
                   </Typography>
                   <Typography>
-                    The Witcher 3: Wild Hunt
+                    Open world adventures of the renowned monster slayer Geralt of Rivia are now even on a larger scale.
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -121,11 +120,11 @@ export default function Album() {
                   title="My Little Pony"
                 />
                 <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h6" component="h3">
                     My Little Pony
                   </Typography>
                   <Typography>
-                    My Little Pony
+                    A fan-made fighting game inspired by the animated television series My Little Pony Friendship is Magic.
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -143,11 +142,11 @@ export default function Album() {
                   title="Breath of the Wild"
                 />
                 <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h6" component="h3">
                     The Legend of Zelda: Breath of the Wild
                   </Typography>
                   <Typography>
-                    The Legend of Zelda: Breath of the Wild
+                    After awakening from a hundred year sleep, memoryless Link hears a mysterious female voice that guides him to a destroyed kingdom of Hyrule.
                   </Typography>
                 </CardContent>
                 <CardActions>
