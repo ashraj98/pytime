@@ -1,7 +1,7 @@
-import GameService from "./game";
-import RecommendationService from "./recommendation";
+import GameService from './game';
+import RecommendationService from './recommendation';
 
 export {
-    GameService,
-    RecommendationService,
-}
+  GameService,
+  RecommendationService,
+};
