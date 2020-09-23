@@ -7,11 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import myLittlePonyHorse from '../../images/myLittlePonyHorse.jpg';
 import skyrimHorse from '../../images/skyrimHorse.jpg';
 import witcherHorse from '../../images/WitcherHorse.jpg';
 import zeldaHorse from '../../images/ZeldaHorse.jpg';
-import { Link } from "react-router-dom";
 import './index.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -80,7 +80,8 @@ export default function Album() {
                     Skyrim: Elder Scolls V
                   </Typography>
                   <Typography>
-                    The fifth game in the series, Skyrim takes us on a journey through the coldest region of Cyrodiil.
+                    The fifth game in the series, Skyrim takes us on a
+                    journey through the coldest region of Cyrodiil.
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -102,7 +103,8 @@ export default function Album() {
                     The Witcher 3: Wild Hunt
                   </Typography>
                   <Typography>
-                    Open world adventures of the renowned monster slayer Geralt of Rivia are now even on a larger scale.
+                    Open world adventures of the renowned monster
+                    slayer Geralt of Rivia are now even on a larger scale.
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -124,7 +126,8 @@ export default function Album() {
                     My Little Pony
                   </Typography>
                   <Typography>
-                    A fan-made fighting game inspired by the animated television series My Little Pony Friendship is Magic.
+                    A fan-made fighting game inspired by the animated
+                    television series My Little Pony Friendship is Magic.
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -146,7 +149,9 @@ export default function Album() {
                     The Legend of Zelda: Breath of the Wild
                   </Typography>
                   <Typography>
-                    After awakening from a hundred year sleep, memoryless Link hears a mysterious female voice that guides him to a destroyed kingdom of Hyrule.
+                    After awakening from a hundred year sleep, memoryless
+                    Link hears a mysterious female voice that guides him
+                    to a destroyed kingdom of Hyrule.
                   </Typography>
                 </CardContent>
                 <CardActions>

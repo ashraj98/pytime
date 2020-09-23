@@ -1,5 +1,6 @@
-import Recommendation from "./recommendation";
+import Recommendation from './recommendation';
 
 export type {
-    Recommendation,
+  // eslint-disable-next-line import/prefer-default-export
+  Recommendation,
 };

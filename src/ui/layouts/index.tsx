@@ -1,5 +1,6 @@
 import DefaultLayout from './default';
 
 export {
-  DefaultLayout
+  // eslint-disable-next-line import/prefer-default-export
+  DefaultLayout,
 };

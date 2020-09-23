@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
 interface Props {
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -29,27 +29,27 @@ const useStyles = makeStyles((theme) => ({
 
 function DefaultLayout(props: Props) {
   const styles = useStyles();
+  const { children } = props;
 
   return (
     <>
-      <CssBaseline/>
+      <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
           <InputBase
-          className={styles.input}
-          placeholder="Search games or tags"
-          inputProps={{'aria-label': 'Search games or tags'}}
-          color='secondary'
+            className={styles.input}
+            placeholder="Search games or tags"
+            inputProps={{ 'aria-label': 'Search games or tags' }}
+            color="secondary"
           />
           <IconButton type="submit" className={styles.iconButton} aria-label="search" color="inherit">
-              <SearchIcon />
+            <SearchIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
-      {props.children}
+      {children}
       <footer className={styles.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-        </Typography>
+        <Typography variant="h6" align="center" gutterBottom />
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           Please give us an A :)
         </Typography>
@@ -57,9 +57,10 @@ function DefaultLayout(props: Props) {
           {'Copyright © '}
           <Link color="inherit" href="https://material-ui.com/">
             PyTime
-          </Link>{' '}
+          </Link>
+          {' '}
           {new Date().getFullYear()}
-          {'.'}
+          .
         </Typography>
       </footer>
     </>

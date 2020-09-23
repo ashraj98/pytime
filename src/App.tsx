@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Switch, Route, Redirect,
+} from 'react-router-dom';
 import './App.scss';
 import { DefaultLayout } from './ui/layouts';
-import Recommendations from "./ui/recommendations";
-import Home from "./ui/home";
+import Recommendations from './ui/recommendations';
+import Home from './ui/home';
 import SingleGame from './ui/singleGame';
 
 function App() {
@@ -12,15 +13,15 @@ function App() {
     <Router>
       <DefaultLayout>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/home"/>}/>
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
           <Route exact path="/home">
-            <Home/>
+            <Home />
           </Route>
           <Route exact path="/recommendations">
-            <Recommendations/>
+            <Recommendations />
           </Route>
           <Route exact path="/game/:slug">
-            <SingleGame/>
+            <SingleGame />
           </Route>
         </Switch>
 
