@@ -1,15 +1,17 @@
-import { Box, Chip, Container, Grid, GridList, GridListTile, Typography } from '@material-ui/core';
+import {
+  Box, Chip, Container, Grid, GridList, GridListTile, Typography,
+} from '@material-ui/core';
 import { SportsEsports } from '@material-ui/icons';
 import React from 'react';
-import './index.scss'
+import './index.scss';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router';
-import games from '../../data/games.json';
 import { Rating } from '@material-ui/lab';
+import games from '../../data/games.json';
 
 function SingleGame() {
   const { slug } = useParams<any>();
-  const game: any = games.find(g => g.slug === slug);
+  const game: any = games.find((g) => g.slug === slug);
   const containerStyle = {
     background: `linear-gradient(
       rgba(0, 0, 0, 0.75), 
@@ -17,7 +19,7 @@ function SingleGame() {
     ),
     url(${game.background_image})`,
     backgroundSize: 'cover',
-  }
+  };
   return (
     <Box style={containerStyle}>
       <Container style={{ padding: 40 }}>
@@ -34,7 +36,7 @@ function SingleGame() {
             />
             <Box>
               {game.tags.filter((tag: any) => tag.language === 'eng').map(
-                (tag: any) => <Chip label={tag.name} key={tag.key} style={{ margin: 5 }} />
+                (tag: any) => <Chip label={tag.name} key={tag.key} style={{ margin: 5 }} />,
               )}
             </Box>
             <Box style={{ marginTop: 10 }}>
@@ -46,7 +48,9 @@ function SingleGame() {
             { game.clip && (
               <ReactPlayer
                 url={game.clip.clips['640']}
-                playing loop muted
+                playing
+                loop
+                muted
                 volume={0}
                 width="100%"
               />
@@ -62,7 +66,7 @@ function SingleGame() {
         </Grid>
       </Container>
     </Box>
-  )
+  );
 }
 
 export default SingleGame;
