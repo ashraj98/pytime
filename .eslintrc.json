@@ -26,7 +26,9 @@
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": "off",
         "import/extensions": "off",
-        "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }]
+        "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }],
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": ["error"]
     },
     "settings": {
         "import/resolver": {

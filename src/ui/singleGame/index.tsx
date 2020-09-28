@@ -1,53 +1,47 @@
-import {
-  Box, Chip, Container, Grid, GridList, GridListTile, Typography,
-} from '@material-ui/core';
-import { SportsEsports } from '@material-ui/icons';
-import React from 'react';
+import { Box, Chip, Container, Grid, GridList, GridListTile, Typography, } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router';
-import { Rating } from '@material-ui/lab';
-import games from '../../data/games.json';
+import { GameService } from '../../services';
+import { Game } from '../../models';
+import { IGDBImageSize, IGDBUtils } from '../common';
 
 function SingleGame() {
   const { slug } = useParams<any>();
-  const game: any = games.find((g) => g.slug === slug);
-  const containerStyle = {
-    background: `linear-gradient(
-      rgba(0, 0, 0, 0.75), 
-      rgba(0, 0, 0, 1)
-    ),
-    url(${game.background_image})`,
-    backgroundSize: 'cover',
-  };
+  const [game, setGame] = useState<Game>();
+  const [hasError, setHasError] = useState(false);
+  useEffect(() => {
+    GameService.detail(slug)
+      .then((res) => setGame(res.data))
+      .catch(() => setHasError(true));
+  }, []);
+  if (!game) {
+    return <></>;
+  }
+  if (hasError) {
+    return <></>;
+  }
   return (
-    <Box style={containerStyle}>
+    <Box>
       <Container style={{ padding: 40 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h2">{game.name}</Typography>
-            <Rating
-              defaultValue={game.rating}
-              max={game.rating_top}
-              size="large"
-              icon={<SportsEsports fontSize="inherit" />}
-              precision={0.1}
-              readOnly
-            />
+            <Typography variant="h3">{game.name}</Typography>
             <Box>
-              {game.tags.filter((tag: any) => tag.language === 'eng').map(
-                (tag: any) => <Chip label={tag.name} key={tag.key} style={{ margin: 5 }} />,
+              {game.themes.map(
+                (theme: any) => <Chip label={theme.name} key={theme.id} style={{ margin: 5 }} />,
               )}
             </Box>
             <Box style={{ marginTop: 10 }}>
-              <Typography variant="h4" component="h2">About</Typography>
-              <p style={{ color: 'white' }}>{game.about}</p>
+              <Typography variant="h4">About</Typography>
+              <p>{game.summary}</p>
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>
-            { game.clip && (
+            { game.videos.length > 0 && (
               <ReactPlayer
-                url={game.clip.clips['640']}
+                url={IGDBUtils.getIGDBVideoURL(game.videos[0].video_id)}
                 playing
                 loop
                 muted
@@ -56,9 +50,12 @@ function SingleGame() {
               />
             )}
             <GridList cellHeight={160} cols={2}>
-              {game.short_screenshots.map((s: any) => (
+              {game.screenshots.map((s) => (
                 <GridListTile key={s.id} cols={1}>
-                  <img src={s.image} alt={s.image} />
+                  <img
+                    src={IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, s.image_id)}
+                    alt={s.image_id}
+                  />
                 </GridListTile>
               ))}
             </GridList>
