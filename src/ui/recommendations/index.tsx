@@ -5,24 +5,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
-import { RecommendationService } from 'services';
-import { Recommendation } from 'models';
-
-const theme = createMuiTheme({
-  overrides: {
-    MuiTypography: {
-      h3: {
-        fontSize: 30,
-      }
-    }
-  }
-});
+import { RecommendationService } from '../../services';
+import { Recommendation } from '../../models';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -79,9 +68,9 @@ export default function Album() {
           </Container>
         </div>
         {/* End hero unit */}
-        <div style={{ marginTop: 20, padding: 30}}>
+        <div style={{ marginTop: 20, padding: 30 }}>
           <Grid container direction="row" spacing={5} justify="center">
-            {games.map(game => (
+            {games.map((game) => (
               <Grid container item xs={4} key={game.name}>
                 <Card>
                   <CardActionArea>
