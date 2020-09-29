@@ -1,9 +1,13 @@
-import { Box, Chip, Container, Grid, GridList, GridListTile, Typography, } from '@material-ui/core';
+import {
+  Box, Chip, Container, Grid, GridList, GridListTile, Typography,
+} from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './index.scss';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router';
-import { Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import {
+  Label, Pie, PieChart, ResponsiveContainer,
+} from 'recharts';
 import { GameService } from '../../services';
 import { Game } from '../../models';
 import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
@@ -23,7 +27,6 @@ function SingleGame() {
   if (hasError) {
     return <></>;
   }
-  console.log(game);
   const userRating = Math.round(game.rating);
   const userAngleDelta = (100 / userRating - 1) * 180;
   const criticRatingCount = game.total_rating_count - game.rating_count;
@@ -71,7 +74,7 @@ function SingleGame() {
                 <p>{game.summary}</p>
                 <span>
                   <b>Genres: </b>
-                  {game.genres.map(g => g.name).join(', ')}
+                  {game.genres.map((g) => g.name).join(', ')}
                 </span>
               </Box>
               <Box style={{ paddingTop: 15 }}>
