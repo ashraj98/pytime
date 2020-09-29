@@ -56,7 +56,7 @@ function SingleGame() {
                 )}
               </Box>
               <Typography variant="h4" component="h2" style={{ paddingTop: 20 }}>
-                {`Released: ${new Date(game.release_dates[0].date).toLocaleDateString()}`}
+                {`Released: ${new Date(game.release_dates[0].date * 1000).toLocaleDateString()}`}
               </Typography>
             </Grid>
           </Grid>
@@ -125,9 +125,15 @@ function SingleGame() {
                   </Grid>
                 </Grid>
               </Box>
+              <Box style={{ paddingTop: 50 }}>
+                <Typography variant="h3">Keywords</Typography>
+                {game.keywords?.map(
+                  (k: any) => <Chip label={k.name} key={k.id} style={{ margin: 5 }} />,
+                )}
+              </Box>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="h3">Trailer & Screenshots</Typography>
+              <Typography variant="h3">Trailer</Typography>
               { game.videos.length > 0 && (
                 <ReactPlayer
                   url={IGDBUtils.getIGDBVideoURL(game.videos[0].video_id)}
@@ -138,7 +144,8 @@ function SingleGame() {
                   width="100%"
                 />
               )}
-              <GridList cellHeight={160} cols={2} style={{ paddingTop: 20 }}>
+              <Typography variant="h3" style={{ paddingTop: 20 }}>Screenshots</Typography>
+              <GridList cellHeight={160} cols={2}>
                 {game.screenshots.map((s) => (
                   <GridListTile key={s.id} cols={1}>
                     <img
