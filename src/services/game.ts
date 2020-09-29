@@ -1,9 +1,9 @@
 import HttpClient from './http';
-import { Recommendation } from '../models';
+import { Game } from '../models';
 
 class GameService {
   public static detail(slug: string) {
-    return HttpClient.instance.post<Recommendation[]>('detail/', { slug });
+    return HttpClient.instance.post<Game>('detail/', { slug });
   }
 }
 
