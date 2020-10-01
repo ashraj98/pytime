@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './index.scss';
-import { RecommendationService } from '../../services';
+import { GameService } from '../../services';
 import { Recommendation } from '../../models';
 import { RootState } from '../../store/types';
 import { IGDBImageSize, IGDBUtils } from '../common';
@@ -50,7 +50,7 @@ export default function Album() {
   const searchTerms = useSelector((state: RootState) => state.searchTerms);
 
   useEffect(() => {
-    RecommendationService.getRecommendations(searchTerms).then((res) => setGames(res.data));
+    GameService.getRecommendations(searchTerms).then((res) => setGames(res.data));
   }, [searchTerms]);
 
   return (
