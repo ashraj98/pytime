@@ -1,8 +1,9 @@
+import { Cover } from './game';
+
 interface Recommendation {
     name: string;
     summary: string;
-    // eslint-disable-next-line camelcase
-    cover_url: string;
+    cover: Cover;
     slug: string;
 }
 

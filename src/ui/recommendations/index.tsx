@@ -1,19 +1,15 @@
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+import {
+  Card, CardActionArea, CardMedia, Container, Grid, Typography,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './index.scss';
 import { RecommendationService } from '../../services';
 import { Recommendation } from '../../models';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../store/types';
+import { IGDBImageSize, IGDBUtils } from '../common';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -54,49 +50,35 @@ export default function Album() {
   const searchTerms = useSelector((state: RootState) => state.searchTerms);
 
   useEffect(() => {
-    console.log(searchTerms);
     RecommendationService.getRecommendations(searchTerms).then((res) => setGames(res.data));
   }, [searchTerms]);
 
   return (
     <>
       <main className="main">
-        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Game Recommendations
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              You wanted games with horses? Here are some games with horses.
-            </Typography>
           </Container>
         </div>
-        {/* End hero unit */}
         <div style={{ marginTop: 20, padding: 30 }}>
           <Grid container direction="row" spacing={5} justify="center">
             {games.map((game) => (
-              <Grid container item xs={4} key={game.name}>
-                <Card>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="300"
-                      image={game.cover_url}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h3" component="h3">
-                        {game.name}
-                      </Typography>
-                      <Typography component="p">
-                        {game.summary}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Link to={`/game/${game.slug}`}>View</Link>
-                  </CardActions>
-                </Card>
+              <Grid item xs={3} key={game.name}>
+                <Link to={`/game/${game.slug}`}>
+                  <Card>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        image={IGDBUtils.getIGDBImageSource(
+                          IGDBImageSize.CoverBig, game.cover.image_id,
+                        )}
+                      />
+                    </CardActionArea>
+                  </Card>
+                </Link>
               </Grid>
             ))}
           </Grid>

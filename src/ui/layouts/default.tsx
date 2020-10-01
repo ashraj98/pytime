@@ -1,11 +1,11 @@
-import { AppBar, Container, IconButton, Toolbar, Typography } from '@material-ui/core';
+import {
+  AppBar, Container, Toolbar, Typography,
+} from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import SearchIcon from '@material-ui/icons/Search';
-import { SearchBar } from '../common';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { SearchBar } from '../common';
 import { RootActions } from '../../store';
 
 interface Props {
@@ -42,9 +42,6 @@ function DefaultLayout(props: Props) {
           <Container>
             <SearchBar onChange={onChange} />
           </Container>
-          <IconButton type="submit" className={styles.iconButton} aria-label="search" color="inherit">
-            <SearchIcon />
-          </IconButton>
         </Toolbar>
       </AppBar>
       {children}
