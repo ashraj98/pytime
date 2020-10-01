@@ -29,11 +29,10 @@ function SingleGame() {
   }
   const userRating = Math.round(game.rating);
   const userAngleDelta = (100 / userRating - 1) * 180;
-  const headerStyle = {
-    background: ImageUtils.imageWithOverlay(
-      IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, game.artworks[0].image_id), 0.6,
-    ),
-  };
+  const heroBg = game.artworks ? ImageUtils.imageWithOverlay(
+    IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, game.artworks[0].image_id), 0.6,
+  ) : 'black';
+  const headerStyle = { background: heroBg };
   return (
     <>
       <Box style={headerStyle} className="featureHeader">
