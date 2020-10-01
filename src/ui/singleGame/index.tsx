@@ -29,12 +29,6 @@ function SingleGame() {
   }
   const userRating = Math.round(game.rating);
   const userAngleDelta = (100 / userRating - 1) * 180;
-  const criticRatingCount = game.total_rating_count - game.rating_count;
-  const criticRating = Math.round(
-    (game.total_rating * game.total_rating_count - game.rating * game.rating_count)
-    / criticRatingCount,
-  );
-  const criticAngleDelta = (100 / criticRating - 1) * 180;
   const headerStyle = {
     background: ImageUtils.imageWithOverlay(
       IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, game.artworks[0].image_id), 0.6,
@@ -79,54 +73,29 @@ function SingleGame() {
               </Box>
               <Box style={{ paddingTop: 15 }}>
                 <Typography variant="h3">Ratings</Typography>
-                <Grid container spacing={2}>
-                  <Grid item xs={6} className="pieContainer">
-                    <ResponsiveContainer>
-                      <PieChart>
-                        <Pie
-                          dataKey="value"
-                          endAngle={360 - userAngleDelta}
-                          startAngle={userAngleDelta}
-                          data={[{ value: 100 }]}
-                          innerRadius={90}
-                          outerRadius={100}
-                          fill="#8884d8"
-                        >
-                          <Label value={userRating} position="center" fontSize={50} />
-                        </Pie>
-                      </PieChart>
-                    </ResponsiveContainer>
-                    <span>
-                      <b>
-                        {`${game.rating_count} `}
-                      </b>
-                      User Ratings
-                    </span>
-                  </Grid>
-                  <Grid item xs={6} className="pieContainer">
-                    <ResponsiveContainer>
-                      <PieChart>
-                        <Pie
-                          dataKey="value"
-                          endAngle={360 - criticAngleDelta}
-                          startAngle={criticAngleDelta}
-                          data={[{ value: 100 }]}
-                          innerRadius={90}
-                          outerRadius={100}
-                          fill="#8884d8"
-                        >
-                          <Label value={criticRating} position="center" fontSize={50} />
-                        </Pie>
-                      </PieChart>
-                    </ResponsiveContainer>
-                    <span>
-                      <b>
-                        {`${criticRatingCount} `}
-                      </b>
-                      Critic Ratings
-                    </span>
-                  </Grid>
-                </Grid>
+                <Box className="pieContainer">
+                  <ResponsiveContainer>
+                    <PieChart>
+                      <Pie
+                        dataKey="value"
+                        endAngle={360 - userAngleDelta}
+                        startAngle={userAngleDelta}
+                        data={[{ value: 100 }]}
+                        innerRadius={90}
+                        outerRadius={100}
+                        fill="#8884d8"
+                      >
+                        <Label value={userRating} position="center" fontSize={50} />
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <span>
+                    <b>
+                      {`${game.rating_count} `}
+                    </b>
+                    User Ratings
+                  </span>
+                </Box>
               </Box>
               <Box style={{ paddingTop: 50 }}>
                 <Typography variant="h3">Keywords</Typography>
