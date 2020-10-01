@@ -1,71 +1,137 @@
 import {
   Box, Chip, Container, Grid, GridList, GridListTile, Typography,
 } from '@material-ui/core';
-import { SportsEsports } from '@material-ui/icons';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router';
-import { Rating } from '@material-ui/lab';
-import games from '../../data/games.json';
+import {
+  Label, Pie, PieChart, ResponsiveContainer,
+} from 'recharts';
+import { GameService } from '../../services';
+import { Game } from '../../models';
+import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
 
 function SingleGame() {
   const { slug } = useParams<any>();
-  const game: any = games.find((g) => g.slug === slug);
-  const containerStyle = {
-    background: `linear-gradient(
-      rgba(0, 0, 0, 0.75), 
-      rgba(0, 0, 0, 1)
+  const [game, setGame] = useState<Game>();
+  const [hasError, setHasError] = useState(false);
+  useEffect(() => {
+    GameService.detail(slug)
+      .then((res) => setGame(res.data))
+      .catch(() => setHasError(true));
+  }, [slug]);
+  if (!game) {
+    return <></>;
+  }
+  if (hasError) {
+    return <></>;
+  }
+  const userRating = Math.round(game.rating);
+  const userAngleDelta = (100 / userRating - 1) * 180;
+  const headerStyle = {
+    background: ImageUtils.imageWithOverlay(
+      IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, game.artworks[0].image_id), 0.6,
     ),
-    url(${game.background_image})`,
-    backgroundSize: 'cover',
   };
   return (
-    <Box style={containerStyle}>
-      <Container style={{ padding: 40 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <Typography variant="h2">{game.name}</Typography>
-            <Rating
-              defaultValue={game.rating}
-              max={game.rating_top}
-              size="large"
-              icon={<SportsEsports fontSize="inherit" />}
-              precision={0.1}
-              readOnly
-            />
-            <Box>
-              {game.tags.filter((tag: any) => tag.language === 'eng').map(
-                (tag: any) => <Chip label={tag.name} key={tag.key} style={{ margin: 5 }} />,
-              )}
-            </Box>
-            <Box style={{ marginTop: 10 }}>
-              <Typography variant="h4" component="h2">About</Typography>
-              <p style={{ color: 'white' }}>{game.about}</p>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            { game.clip && (
-              <ReactPlayer
-                url={game.clip.clips['640']}
-                playing
-                loop
-                muted
-                volume={0}
-                width="100%"
+    <>
+      <Box style={headerStyle} className="featureHeader">
+        <Container style={{ padding: 40 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={4}>
+              <img
+                src={IGDBUtils.getIGDBImageSource(IGDBImageSize.CoverBig, game.cover.image_id)}
+                alt={game.cover.image_id}
               />
-            )}
-            <GridList cellHeight={160} cols={2}>
-              {game.short_screenshots.map((s: any) => (
-                <GridListTile key={s.id} cols={1}>
-                  <img src={s.image} alt={s.image} />
-                </GridListTile>
-              ))}
-            </GridList>
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <Typography variant="h1" component="h2">{game.name}</Typography>
+              <Box style={{ paddingTop: 20 }}>
+                {game.themes?.map(
+                  (theme: any) => <Chip label={theme.name} key={theme.id} style={{ margin: 5 }} />,
+                )}
+              </Box>
+              <Typography variant="h4" component="h2" style={{ paddingTop: 20 }}>
+                {`Released: ${new Date(game.release_dates[0].date * 1000).toLocaleDateString()}`}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+      <Box>
+        <Container style={{ padding: 40 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Box>
+                <Typography variant="h3">About</Typography>
+                <p>{game.summary}</p>
+                <span>
+                  <b>Genres: </b>
+                  {game.genres.map((g) => g.name).join(', ')}
+                </span>
+              </Box>
+              <Box style={{ paddingTop: 15 }}>
+                <Typography variant="h3">Ratings</Typography>
+                <Box className="pieContainer">
+                  <ResponsiveContainer>
+                    <PieChart>
+                      <Pie
+                        dataKey="value"
+                        endAngle={360 - userAngleDelta}
+                        startAngle={userAngleDelta}
+                        data={[{ value: 100 }]}
+                        innerRadius={90}
+                        outerRadius={100}
+                        fill="#8884d8"
+                      >
+                        <Label value={userRating} position="center" fontSize={50} />
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <span>
+                    <b>
+                      {`${game.rating_count} `}
+                    </b>
+                    User Ratings
+                  </span>
+                </Box>
+              </Box>
+              <Box style={{ paddingTop: 50 }}>
+                <Typography variant="h3">Keywords</Typography>
+                {game.keywords?.map(
+                  (k: any) => <Chip label={k.name} key={k.id} style={{ margin: 5 }} />,
+                )}
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h3">Trailer</Typography>
+              { game.videos.length > 0 && (
+                <ReactPlayer
+                  url={IGDBUtils.getIGDBVideoURL(game.videos[0].video_id)}
+                  playing
+                  loop
+                  muted
+                  volume={0}
+                  width="100%"
+                />
+              )}
+              <Typography variant="h3" style={{ paddingTop: 20 }}>Screenshots</Typography>
+              <GridList cellHeight={160} cols={2}>
+                {game.screenshots.map((s) => (
+                  <GridListTile key={s.id} cols={1}>
+                    <img
+                      src={IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, s.image_id)}
+                      alt={s.image_id}
+                    />
+                  </GridListTile>
+                ))}
+              </GridList>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </>
   );
 }
 

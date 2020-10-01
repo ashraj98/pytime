@@ -1,6 +1,9 @@
+import { Game } from './game';
 import Recommendation from './recommendation';
+import Suggestion from './suggestion';
 
 export type {
-  // eslint-disable-next-line import/prefer-default-export
+  Game,
   Recommendation,
+  Suggestion,
 };
