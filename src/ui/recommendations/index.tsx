@@ -62,9 +62,6 @@ export default function Album() {
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Game Recommendations
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              You wanted games with horses? Here are some games with horses.
-            </Typography>
           </Container>
         </div>
         {/* End hero unit */}
