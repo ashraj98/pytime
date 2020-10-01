@@ -27,7 +27,7 @@ function SingleGame() {
   if (hasError) {
     return <></>;
   }
-  const userRating = Math.round(game.rating);
+  const userRating = Math.round(game.rating || 100);
   const userAngleDelta = (100 / userRating - 1) * 180;
   const heroBg = game.artworks ? ImageUtils.imageWithOverlay(
     IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, game.artworks[0].image_id), 0.6,
