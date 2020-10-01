@@ -15,8 +15,6 @@ function Home() {
       <h2>Discover new video games in seconds</h2>
       <SearchBar
         placeholder="Search games or tags"
-        value=""
-          // onChange={(newValue) => this.setState({ value: newValue })}
         onRequestSearch={() => history.push('/recommendations')}
       />
     </div>
