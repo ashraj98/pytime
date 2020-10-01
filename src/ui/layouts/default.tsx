@@ -4,9 +4,7 @@ import {
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { SearchBar } from '../common';
-import { RootActions } from '../../store';
 
 interface Props {
   children: React.ReactNode;
@@ -29,10 +27,6 @@ const useStyles = makeStyles((theme) => ({
 function DefaultLayout(props: Props) {
   const styles = useStyles();
   const { children } = props;
-  const dispatch = useDispatch();
-  const onChange = (val: any[]) => dispatch(
-    RootActions.UpdateSearchQuery((val || []).map((v) => v.value)),
-  );
 
   return (
     <>
@@ -40,7 +34,7 @@ function DefaultLayout(props: Props) {
       <AppBar position="relative">
         <Toolbar>
           <Container>
-            <SearchBar onChange={onChange} />
+            <SearchBar />
           </Container>
         </Toolbar>
       </AppBar>

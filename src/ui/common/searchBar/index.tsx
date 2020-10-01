@@ -1,25 +1,19 @@
 import React from 'react';
 import AsyncCreatable from 'react-select/async-creatable';
 import './index.scss';
+import { useDispatch } from 'react-redux';
+import { RootActions } from '../../../store';
+import { SuggestionService } from '../../../services';
 
-const promiseOptions = () => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve([
-      { value: 'Tag1', label: 'Tag1' },
-      { value: 'Tag2', label: 'Tag2' },
-      { value: 'Tag3', label: 'Tag3' },
-      { value: 'Tag4', label: 'Tag4' },
-      { value: 'Tag5', label: 'Tag5' },
-    ]);
-  }, 1000);
+const promiseOptions = (term: string) => new Promise((resolve) => {
+  SuggestionService.search(term).then((res) => resolve(res.data)).catch(() => resolve([]));
 });
 
-interface SearchBarProps {
-  onChange: (value: any) => void;
-}
-
-function SearchBar(props: SearchBarProps) {
-  const { onChange } = props;
+function SearchBar() {
+  const dispatch = useDispatch();
+  const onChange = (terms: any[]) => dispatch(
+    RootActions.UpdateSearchQuery((terms || []).map((t) => t.value)),
+  );
   return (
     <AsyncCreatable
       isMulti
