@@ -5,6 +5,8 @@ import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import { SearchBar } from '../common';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { RootActions } from '../../store';
 
 interface Props {
   children: React.ReactNode;
@@ -27,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
 function DefaultLayout(props: Props) {
   const styles = useStyles();
   const { children } = props;
+  const dispatch = useDispatch();
+  const onChange = (val: any[]) => dispatch(
+    RootActions.UpdateSearchQuery((val || []).map((v) => v.value)),
+  );
 
   return (
     <>
@@ -34,7 +40,7 @@ function DefaultLayout(props: Props) {
       <AppBar position="relative">
         <Toolbar>
           <Container>
-            <SearchBar onChange={(val) => console.log(val)} />
+            <SearchBar onChange={onChange} />
           </Container>
           <IconButton type="submit" className={styles.iconButton} aria-label="search" color="inherit">
             <SearchIcon />

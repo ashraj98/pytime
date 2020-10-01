@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 import './index.scss';
 import { RecommendationService } from '../../services';
 import { Recommendation } from '../../models';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/types';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -49,9 +51,12 @@ export default function Album() {
   const [games, setGames] = useState<Recommendation[]>([]);
   const classes = useStyles();
 
+  const searchTerms = useSelector((state: RootState) => state.searchTerms);
+
   useEffect(() => {
-    RecommendationService.getRecommendations([]).then((res) => setGames(res.data));
-  });
+    console.log(searchTerms);
+    RecommendationService.getRecommendations(searchTerms).then((res) => setGames(res.data));
+  }, [searchTerms]);
 
   return (
     <>
