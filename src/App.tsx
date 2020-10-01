@@ -16,7 +16,7 @@ function App() {
       <Router>
         <DefaultLayout>
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/home" />} />
+            <Route exact path="/" render={() => <Redirect to="/recommendations" />} />
             <Route exact path="/home">
               <Home />
             </Route>
