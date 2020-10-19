@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { SearchBar } from '../common';
+import { Link } from 'react-router-dom';
 
 interface Props {
   children: React.ReactNode;
@@ -35,6 +36,9 @@ function DefaultLayout(props: Props) {
         <Toolbar>
           <Container>
             <SearchBar />
+            <Link to={`/login`}>
+              Log in
+            </Link>
           </Container>
         </Toolbar>
       </AppBar>
