@@ -7,3 +7,7 @@ jobs:
         - yarn run build
         - yarn run lint
         - yarn run test
+deploy:
+  provider: surge
+  project: web/src/build
+  domain: beneficial-tray.surge.sh
