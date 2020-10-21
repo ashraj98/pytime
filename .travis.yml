@@ -1,5 +1,8 @@
 language: node_js
 node_js: 14
+env:
+  SURGE_LOGIN = negretenico0@gmail.com
+  SURGE_TOKEN = League123!
 jobs:
   include:
     - stage: test
