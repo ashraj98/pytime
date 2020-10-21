@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -10,7 +10,7 @@ import { red } from '@material-ui/core/colors';
 import axiosInstance from "../../axiosApi";
 
 interface FormData {
-    email: string;
+    username: string;
     password: string;
 }
 
@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Login() {
+    const history = useHistory();
     const { handleSubmit, register, errors } = useForm<FormData>();
     const classes = useStyles();
-    
+
     const onSubmit = handleSubmit((res) => {
-        console.log(res);
         axiosInstance.post('/token/obtain/', {
-                username: res.email,
+                username: res.username,
                 password: res.password
             }).then(
                 result => {
@@ -52,19 +52,15 @@ function Login() {
                             <Grid item xs={12}>
                                 <TextField 
                                 fullWidth 
-                                label="Email" 
-                                name="email" 
+                                label="Username" 
+                                name="username" 
                                 size="small" 
                                 variant="outlined"
                                 inputRef={register({
                                     required: "Required",
-                                    pattern: {
-                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                        message: "invalid email address"
-                                    }
                                 })}
                                 /> 
-                                <span className={classes.span}>{errors.email && errors.email.message}</span>
+                                <span className={classes.span}>{errors.username && errors.username.message}</span>
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField

@@ -1,5 +1,5 @@
 import {
-  Box, Chip, Container, Grid, GridList, GridListTile, Typography,
+  Box, Chip, Container, Grid, GridList, GridListTile, Typography, IconButton
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './index.scss';
@@ -11,6 +11,8 @@ import {
 import { GameService } from '../../services';
 import { Game } from '../../models';
 import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
 
 function SingleGame() {
   const { slug } = useParams<any>();
@@ -33,6 +35,18 @@ function SingleGame() {
     IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, game.artworks[0].image_id), 0.6,
   ) : 'black';
   const headerStyle = { background: heroBg };
+
+    const onClick = (() => {
+      var btn = document.getElementById("favorite");
+      if (btn != null) {
+        if (btn.innerHTML == '<StarIcon/>') {
+          btn.innerHTML = '<StarBorderIcon/>';
+        } else {
+          btn.innerHTML = '<StarIcon/>';
+        }
+      }
+    })
+
   return (
     <>
       <Box style={headerStyle} className="featureHeader">
@@ -54,6 +68,9 @@ function SingleGame() {
               <Typography variant="h4" component="h2" style={{ paddingTop: 20 }}>
                 {`Released: ${new Date(game.release_dates[0].date * 1000).toLocaleDateString()}`}
               </Typography>
+              <IconButton id="favorite" onClick={onClick}>
+                <StarBorderIcon/>
+              </IconButton>
             </Grid>
           </Grid>
         </Container>

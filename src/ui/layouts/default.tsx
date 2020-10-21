@@ -1,11 +1,13 @@
 import {
-  AppBar, Container, Toolbar, Typography,
+  AppBar, Grid, Toolbar, Typography,
 } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { SearchBar } from '../common';
 import { Link } from 'react-router-dom';
+import PersonIcon from '@material-ui/icons/Person';
+import grey from '@material-ui/core/colors/grey';
 
 interface Props {
   children: React.ReactNode;
@@ -34,12 +36,18 @@ function DefaultLayout(props: Props) {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <Container>
-            <SearchBar />
-            <Link to={`/login`}>
-              Log in
-            </Link>
-          </Container>
+          <Grid container spacing={3}>
+            <Grid item xs={11}>
+              <SearchBar />
+            </Grid>
+            <Grid item xs >
+              <Grid container xs justify="flex-end">
+                <Link to={`/login`}>
+                  <PersonIcon style={{ color: grey[50] }}/>
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       {children}
