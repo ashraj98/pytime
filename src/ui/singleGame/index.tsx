@@ -11,7 +11,7 @@ import {
 import { GameService } from '../../services';
 import { Game } from '../../models';
 import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { grey } from '@material-ui/core/colors';
 import StarIcon from '@material-ui/icons/Star';
 
 function SingleGame() {
@@ -37,16 +37,7 @@ function SingleGame() {
   const headerStyle = { background: heroBg };
 
     const onClick = (() => {
-    /*
-      var btn = document.getElementById("favorite");
-      if (btn != null) {
-        if (btn.innerHTML == '<StarIcon/>') {
-          btn.innerHTML = '<StarBorderIcon/>';
-        } else {
-          btn.innerHTML = '<StarIcon/>';
-
-      }
-      */
+      
     })
 
   return (
@@ -71,7 +62,7 @@ function SingleGame() {
                 {`Released: ${new Date(game.release_dates[0].date * 1000).toLocaleDateString()}`}
               </Typography>
               <IconButton id="favorite" onClick={onClick}>
-                <StarBorderIcon/>
+                <StarIcon style={{ color: grey[50] }}/>
               </IconButton>
             </Grid>
           </Grid>

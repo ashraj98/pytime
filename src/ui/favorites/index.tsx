@@ -4,11 +4,9 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import './index.scss';
 import { Favorite } from '../../models';
 import { FavoriteService } from '../../services';
-import { RootState } from '../../store/types';
 import { IGDBImageSize, IGDBUtils } from '../common';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +45,7 @@ export default function Album() {
   const [games, setGames] = useState<Favorite[]>([]);
   const classes = useStyles();
 
-  var username = "b";
+  const username = localStorage.getItem('username');
 
   useEffect(() => {
     FavoriteService.getFavorites(username).then((res) => setGames(res.data));

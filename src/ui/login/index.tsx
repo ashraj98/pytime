@@ -16,7 +16,7 @@ interface FormData {
 
 const useStyles = makeStyles((theme) => ({
     container: {
-      padding: theme.spacing(3),
+        padding: theme.spacing(3),
     },
     span: {
         color: red[600],
@@ -29,18 +29,18 @@ function Login() {
     const classes = useStyles();
     const onSubmit = handleSubmit((res) => {
         axiosInstance.post('/token/obtain/', {
-                username: res.username,
-                password: res.password
-            }).then(
-                result => {
-                    axiosInstance.defaults.headers['Authorization'] = "JWT " + result.data.access;
-                    localStorage.setItem('access_token', result.data.access);
-                    localStorage.setItem('refresh_token', result.data.refresh);
-                    localStorage.setItem('username', res.username)
-                    if (result.status == 200) {
-                        history.push('/recommendations');
-                    }
+            username: res.username,
+            password: res.password
+        }).then(
+            result => {
+                axiosInstance.defaults.headers['Authorization'] = "JWT " + result.data.access;
+                localStorage.setItem('access_token', result.data.access);
+                localStorage.setItem('refresh_token', result.data.refresh);
+                localStorage.setItem('username', res.username)
+                if (result.status == 200) {
+                    history.push('/recommendations');
                 }
+            }
         ).catch (error => {
             throw error;
         })

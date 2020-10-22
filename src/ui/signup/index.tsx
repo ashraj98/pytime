@@ -34,7 +34,7 @@ function Signup() {
         if (data.confirmpassword !== data.password) {
             alert("Passwords don't match");
         } else {
-         axiosInstance.post('/user/create/', {
+            axiosInstance.post('/user/create/', {
                 username: data.username,
                 password: data.password,
                 email: data.email
@@ -47,9 +47,9 @@ function Signup() {
                     if (result.status == 201) {
                         history.push('/recommendations');
                     }
-                }).catch (error => {
+            }).catch (error => {
                 throw error;
-        })
+            })
         }
     });
 
