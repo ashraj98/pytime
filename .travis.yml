@@ -1,9 +1,13 @@
 language: node_js
 node_js: 14
-jobs:
-  include:
-    - stage: test
-      script:
-        - yarn run build
-        - yarn run lint
-        - yarn run test
+script:
+  - cp -rf src/env/index.prod.ts src/env/index.ts
+  - yarn run build
+  - yarn run lint
+  - yarn run test
+deploy:
+  provider: surge
+  project: build
+  domain: pytime.tk
+  on:
+    branch: master
