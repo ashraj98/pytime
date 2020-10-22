@@ -41,10 +41,17 @@ function DefaultLayout(props: Props) {
               <SearchBar />
             </Grid>
             <Grid item xs >
-              <Grid container xs justify="flex-end">
-                <Link to={`/login`}>
-                  <PersonIcon style={{ color: grey[50] }}/>
-                </Link>
+              <Grid container spacing={3} xs justify="flex-end">
+               <Grid item xs >
+                    <Link to={'/favorites'}>
+                        <span style={{ color: grey[50] }}> {sessionStorage.getItem('username') || ""} </span>
+                    </Link>
+                </Grid>
+                <Grid item xs >
+                    <Link to={`/login`}>
+                      <PersonIcon style={{ color: grey[50] }}/>
+                    </Link>
+               </Grid>
               </Grid>
             </Grid>
           </Grid>

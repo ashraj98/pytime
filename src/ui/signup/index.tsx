@@ -41,9 +41,9 @@ function Signup() {
             }).then(
                 result => {
                     axiosInstance.defaults.headers['Authorization'] = "JWT " + result.data.access;
-                    localStorage.setItem('access_token', result.data.access);
-                    localStorage.setItem('refresh_token', result.data.refresh);
-                    localStorage.setItem('username', data.username);
+                    sessionStorage.setItem('access_token', result.data.access);
+                    sessionStorage.setItem('refresh_token', result.data.refresh);
+                    sessionStorage.setItem('username', data.username);
                     if (result.status == 201) {
                         history.push('/recommendations');
                     }

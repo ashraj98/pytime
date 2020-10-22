@@ -40,8 +40,8 @@ function SingleGame() {
   const headerStyle = { background: heroBg };
 
     const onClick = (() => {
-         if (localStorage.getItem('username')) {
-         FavoriteService.addFavorite(slug, localStorage.getItem('username') || "");
+         if (sessionStorage.getItem('username')) {
+         FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
         } else {
             alert("Create an account and login to add favorites.");
         }
