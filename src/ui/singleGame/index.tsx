@@ -13,6 +13,9 @@ import { Game } from '../../models';
 import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
 import { grey } from '@material-ui/core/colors';
 import StarIcon from '@material-ui/icons/Star';
+import axiosInstance from "../../axiosApi";
+import { Favorite } from '../../models';
+import { FavoriteService } from '../../services';
 
 function SingleGame() {
   const { slug } = useParams<any>();
@@ -37,8 +40,12 @@ function SingleGame() {
   const headerStyle = { background: heroBg };
 
     const onClick = (() => {
-      
-    })
+         if (localStorage.getItem('username')) {
+         FavoriteService.addFavorite(slug, localStorage.getItem('username') || "");
+        } else {
+            alert("Create an account and login to add favorites.");
+        }
+    });
 
   return (
     <>

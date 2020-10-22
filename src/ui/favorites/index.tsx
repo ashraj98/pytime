@@ -45,11 +45,11 @@ export default function Album() {
   const [games, setGames] = useState<Favorite[]>([]);
   const classes = useStyles();
 
-  const username = localStorage.getItem('username');
+  const username = localStorage.getItem('username') || "";
 
   useEffect(() => {
     FavoriteService.getFavorites(username).then((res) => setGames(res.data));
-  });
+  }, [username]);
 
   return (
     <>
@@ -57,7 +57,7 @@ export default function Album() {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Game Recommendations
+              Your Favorites
             </Typography>
           </Container>
         </div>
