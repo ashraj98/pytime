@@ -51,7 +51,7 @@ function DefaultLayout(props: Props) {
                     <Link to={`/login`}>
                       <PersonIcon style={{ color: grey[50] }}/>
                     </Link>
-               </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

@@ -48,6 +48,7 @@ function Signup() {
                         history.push('/recommendations');
                     }
             }).catch (error => {
+                alert("Sign up failed, try different username or email");
                 throw error;
             })
         }

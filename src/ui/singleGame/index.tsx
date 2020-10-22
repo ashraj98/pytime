@@ -12,9 +12,8 @@ import { GameService } from '../../services';
 import { Game } from '../../models';
 import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
 import { grey } from '@material-ui/core/colors';
+import { yellow } from '@material-ui/core/colors';
 import StarIcon from '@material-ui/icons/Star';
-import axiosInstance from "../../axiosApi";
-import { Favorite } from '../../models';
 import { FavoriteService } from '../../services';
 
 function SingleGame() {
@@ -40,11 +39,15 @@ function SingleGame() {
   const headerStyle = { background: heroBg };
 
     const onClick = (() => {
-         if (sessionStorage.getItem('username')) {
-         FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
-        } else {
-            alert("Create an account and login to add favorites.");
+      if (sessionStorage.getItem('username')) {
+        FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
+        var btn = document.getElementById("favorite");
+        if (btn != null) {
+          btn.style.color = yellow[500];
         }
+      } else {
+          alert("Create an account and login to add favorites.");
+      }
     });
 
   return (
@@ -68,8 +71,8 @@ function SingleGame() {
               <Typography variant="h4" component="h2" style={{ paddingTop: 20 }}>
                 {`Released: ${new Date(game.release_dates[0].date * 1000).toLocaleDateString()}`}
               </Typography>
-              <IconButton id="favorite" onClick={onClick}>
-                <StarIcon style={{ color: grey[50] }}/>
+              <IconButton onClick={onClick}>
+                <StarIcon id="favorite" style={{ color: grey[50] }}/>
               </IconButton>
             </Grid>
           </Grid>

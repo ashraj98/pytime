@@ -42,6 +42,7 @@ function Login() {
                 }
             }
         ).catch (error => {
+            alert("Login failed");
             throw error;
         })
     });
