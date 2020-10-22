@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
 import { red } from '@material-ui/core/colors';
+import axiosInstance from "../../axiosApi";
 
 interface FormData {
     email: string;
@@ -30,8 +31,18 @@ function Signup() {
     const onSubmit = handleSubmit((data) => {
         if (data.confirmpassword !== data.password) {
             alert("Passwords don't match");
+        } else {
+         axiosInstance.post('/user/create/', {
+                username: data.username,
+                password: data.password,
+                email: data.email
+            }).then(
+                result => {
+                    console.log(result.status);
+                }).catch (error => {
+                throw error;
+        })
         }
-        console.log(data);
     });
 
     return (

@@ -27,7 +27,6 @@ function Login() {
     const history = useHistory();
     const { handleSubmit, register, errors } = useForm<FormData>();
     const classes = useStyles();
-
     const onSubmit = handleSubmit((res) => {
         axiosInstance.post('/token/obtain/', {
                 username: res.username,

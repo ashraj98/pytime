@@ -37,14 +37,16 @@ function SingleGame() {
   const headerStyle = { background: heroBg };
 
     const onClick = (() => {
+    /*
       var btn = document.getElementById("favorite");
       if (btn != null) {
         if (btn.innerHTML == '<StarIcon/>') {
           btn.innerHTML = '<StarBorderIcon/>';
         } else {
           btn.innerHTML = '<StarIcon/>';
-        }
+
       }
+      */
     })
 
   return (
