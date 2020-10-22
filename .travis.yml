@@ -2,7 +2,7 @@ language: node_js
 node_js: 14
 env:
   SURGE_LOGIN = negretenico0@gmail.com
-  SURGE_TOKEN = League123!
+  SURGE_TOKEN = 209ef4991091551cb5e5abf322180e68
 jobs:
   include:
     - stage: test
@@ -12,5 +12,5 @@ jobs:
         - yarn run test
 deploy:
   provider: surge
-  project: web/src/build
-  domain: beneficial-tray.surge.sh
+  project: build 
+  domain: pytime.tk
