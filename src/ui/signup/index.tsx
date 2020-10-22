@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Signup() {
+    const history = useHistory();
     const { handleSubmit, register, errors } = useForm<FormData>();
     const classes = useStyles();
 
@@ -38,7 +40,9 @@ function Signup() {
                 email: data.email
             }).then(
                 result => {
-                    console.log(result.status);
+                    if (result.status == 201) {
+                        history.push('/recommendations');
+                    }
                 }).catch (error => {
                 throw error;
         })
