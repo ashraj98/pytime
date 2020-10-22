@@ -36,6 +36,10 @@ function Login() {
                     axiosInstance.defaults.headers['Authorization'] = "JWT " + result.data.access;
                     localStorage.setItem('access_token', result.data.access);
                     localStorage.setItem('refresh_token', result.data.refresh);
+                    localStorage.setItem('username', res.username)
+                    if (result.status == 200) {
+                        history.push('/recommendations');
+                    }
                 }
         ).catch (error => {
             throw error;
