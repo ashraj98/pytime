@@ -1,8 +1,8 @@
 language: node_js
 node_js: 14
 env:
-  SURGE_LOGIN = negretenico0@gmail.com
-  SURGE_TOKEN = 209ef4991091551cb5e5abf322180e68
+  - SURGE_LOGIN=negretenico0@gmail.com
+  - SURGE_TOKEN=209ef4991091551cb5e5abf322180e68
 script:
   - cp -rf src/env/index.prod.ts src/env/index.ts
   - yarn run build
