@@ -67,7 +67,7 @@ function SingleGame() {
                 <p>{game.summary}</p>
                 <span>
                   <b>Genres: </b>
-                  {game.genres.map((g) => g.name).join(', ')}
+                  {game.genres?.map((g) => g.name).join(', ')}
                 </span>
               </Box>
               <Box style={{ paddingTop: 15 }}>
@@ -105,7 +105,7 @@ function SingleGame() {
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography variant="h3">Trailer</Typography>
-              { game.videos.length > 0 && (
+              { game.videos?.length > 0 && (
                 <ReactPlayer
                   url={IGDBUtils.getIGDBVideoURL(game.videos[0].video_id)}
                   playing
