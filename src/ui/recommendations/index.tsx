@@ -1,5 +1,5 @@
 import {
-  Card, CardActionArea, CardMedia, Container, Grid, Typography,
+  Card, CardHeader, CardMedia, Container, Grid, Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
@@ -10,6 +10,7 @@ import { GameService } from '../../services';
 import { Recommendation } from '../../models';
 import { RootState } from '../../store/types';
 import { IGDBImageSize, IGDBUtils } from '../common';
+import ArtworkMatch from '../../models/artworkMatch';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -43,15 +44,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Album() {
+interface ArtworkData {
+  image: string
+  size: IGDBImageSize
+  useTitle: boolean
+}
+
+type ArtworkMap = { [index:string] : ArtworkData };
+
+export default function Recommendations() {
   const [games, setGames] = useState<Recommendation[]>([]);
+  const [artworks, setArtworks] = useState<ArtworkMatch[]>([]);
+  const [gameImages, setGameImages] = useState<ArtworkMap>({});
+  const [processing, setProcessing] = useState<boolean>(true);
   const classes = useStyles();
 
   const searchTerms = useSelector((state: RootState) => state.searchTerms);
 
   useEffect(() => {
+    setProcessing(true);
     GameService.getRecommendations(searchTerms).then((res) => setGames(res.data));
   }, [searchTerms]);
+
+  useEffect(() => {
+    if (games.length > 0 && searchTerms.length > 0) {
+      const gameSlugs = games.map((g) => g.slug);
+      GameService.coverArt(gameSlugs, searchTerms).then((res) => setArtworks(res.data));
+    }
+  }, [games, searchTerms]);
+
+  useEffect(() => {
+    const artworkMap:ArtworkMap = {};
+    games.forEach((game) => {
+      const art = artworks.find((am) => am.game === game.slug);
+      if (art) {
+        artworkMap[game.slug] = { image: art.image, size: IGDBImageSize.FullHD, useTitle: true };
+      } else {
+        artworkMap[game.slug] = {
+          image: game.cover.image_id, size: IGDBImageSize.CoverBig, useTitle: false,
+        };
+      }
+    });
+    setGameImages(artworkMap);
+    setProcessing(false);
+  }, [games, artworks]);
+
+  if (processing) return <></>;
 
   return (
     <>
@@ -69,14 +107,13 @@ export default function Album() {
               <Grid item xs={3} key={game.name}>
                 <Link to={`/game/${game.slug}`}>
                   <Card>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        image={IGDBUtils.getIGDBImageSource(
-                          IGDBImageSize.CoverBig, game.cover.image_id,
-                        )}
-                      />
-                    </CardActionArea>
+                    { gameImages[game.slug]?.useTitle && <CardHeader title={game.name} /> }
+                    <CardMedia
+                      component="img"
+                      image={IGDBUtils.getIGDBImageSource(
+                        gameImages[game.slug]?.size, gameImages[game.slug]?.image,
+                      )}
+                    />
                   </Card>
                 </Link>
               </Grid>
