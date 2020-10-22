@@ -47,7 +47,7 @@ export default function Album() {
   const [games, setGames] = useState<Favorite[]>([]);
   const classes = useStyles();
 
-  const username = localStorage.getItem('username');
+  var username = "b";
 
   useEffect(() => {
     FavoriteService.getFavorites(username).then((res) => setGames(res.data));
