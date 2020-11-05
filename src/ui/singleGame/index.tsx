@@ -20,10 +20,16 @@ function SingleGame() {
   const { slug } = useParams<any>();
   const [game, setGame] = useState<Game>();
   const [hasError, setHasError] = useState(false);
+  let isFavorite: boolean = false;
+
   useEffect(() => {
     GameService.detail(slug)
       .then((res) => setGame(res.data))
       .catch(() => setHasError(true));
+    
+    FavoriteService.isFavorite(slug, sessionStorage.getItem('username') || "")
+      .then((res) => isFavorite = res.data.is_favorite)
+      .catch(() => setHasError(true))
   }, [slug]);
   if (!game) {
     return <></>;
@@ -38,17 +44,30 @@ function SingleGame() {
   ) : 'black';
   const headerStyle = { background: heroBg };
 
-    const onClick = (() => {
-      if (sessionStorage.getItem('username')) {
-        FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
-        var btn = document.getElementById("favorite");
-        if (btn != null) {
+  const onClick = (() => {
+    if (sessionStorage.getItem('username')) {
+      var btn = document.getElementById("favorite");
+      if (btn != null) {
+        if (btn.style.color != yellow[500]) {
+          FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
           btn.style.color = yellow[500];
+        } else {
+          FavoriteService.removeFavorite(slug, sessionStorage.getItem('username') || "");
+          btn.style.color = grey[50];
         }
-      } else {
-          alert("Create an account and login to add favorites.");
       }
-    });
+    } else {
+        alert("Create an account and login to add favorites.");
+    }
+  });
+
+  const renderFavoriteButton = () => {
+    if (isFavorite) {
+      return <StarIcon id="favorite" style={{ color: yellow[500] }}/>;
+    } else {
+      return <StarIcon id="favorite" style={{ color: grey[50] }}/>;
+    }
+  }
 
   return (
     <>
@@ -72,7 +91,7 @@ function SingleGame() {
                 {`Released: ${new Date(game.release_dates[0].date * 1000).toLocaleDateString()}`}
               </Typography>
               <IconButton onClick={onClick}>
-                <StarIcon id="favorite" style={{ color: grey[50] }}/>
+                {renderFavoriteButton()}
               </IconButton>
             </Grid>
           </Grid>
