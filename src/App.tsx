@@ -8,7 +8,10 @@ import { DefaultLayout } from './ui/layouts';
 import Recommendations from './ui/recommendations';
 import Home from './ui/home';
 import SingleGame from './ui/singleGame';
+import Login from './ui/login';
+import Signup from './ui/signup';
 import { RootStore } from './store';
+import Favorites from './ui/favorites';
 
 function App() {
   return (
@@ -23,8 +26,17 @@ function App() {
             <Route exact path="/recommendations">
               <Recommendations />
             </Route>
-            <Route exact path="/game/:slug">
+            <Route exact path="/favorites">
+              <Favorites />
+            </Route>
+            <Route exact path="/game/:slug">  
               <SingleGame />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
             </Route>
           </Switch>
         </DefaultLayout>

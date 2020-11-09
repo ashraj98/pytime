@@ -127,4 +127,5 @@ export interface Game {
     // eslint-disable-next-line camelcase
     total_rating_count: number;
     themes: Theme[];
+    is_favorite: boolean;
 }
