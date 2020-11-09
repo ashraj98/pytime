@@ -1,5 +1,5 @@
 import {
-  Box, Chip, Container, Grid, GridList, GridListTile, Typography,
+  Box, Chip, Container, Grid, GridList, GridListTile, Typography, IconButton
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './index.scss';
@@ -11,15 +11,25 @@ import {
 import { GameService } from '../../services';
 import { Game } from '../../models';
 import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
+import { grey } from '@material-ui/core/colors';
+import { yellow } from '@material-ui/core/colors';
+import StarIcon from '@material-ui/icons/Star';
+import { FavoriteService } from '../../services';
 
 function SingleGame() {
   const { slug } = useParams<any>();
   const [game, setGame] = useState<Game>();
   const [hasError, setHasError] = useState(false);
+  let isFavorite: boolean = false;
+
   useEffect(() => {
     GameService.detail(slug)
       .then((res) => setGame(res.data))
       .catch(() => setHasError(true));
+    
+    FavoriteService.isFavorite(slug, sessionStorage.getItem('username') || "")
+      .then((res) => isFavorite = res.data.is_favorite)
+      .catch(() => setHasError(true))
   }, [slug]);
   if (!game) {
     return <></>;
@@ -33,6 +43,32 @@ function SingleGame() {
     IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, game.artworks[0].image_id), 0.6,
   ) : 'black';
   const headerStyle = { background: heroBg };
+
+  const onClick = (() => {
+    if (sessionStorage.getItem('username')) {
+      var btn = document.getElementById("favorite");
+      if (btn != null) {
+        if (btn.style.color != yellow[500]) {
+          FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
+          btn.style.color = yellow[500];
+        } else {
+          FavoriteService.removeFavorite(slug, sessionStorage.getItem('username') || "");
+          btn.style.color = grey[50];
+        }
+      }
+    } else {
+        alert("Create an account and login to add favorites.");
+    }
+  });
+
+  const renderFavoriteButton = () => {
+    if (isFavorite) {
+      return <StarIcon id="favorite" style={{ color: yellow[500] }}/>;
+    } else {
+      return <StarIcon id="favorite" style={{ color: grey[50] }}/>;
+    }
+  }
+
   return (
     <>
       <Box style={headerStyle} className="featureHeader">
@@ -54,6 +90,9 @@ function SingleGame() {
               <Typography variant="h4" component="h2" style={{ paddingTop: 20 }}>
                 {`Released: ${new Date(game.release_dates[0].date * 1000).toLocaleDateString()}`}
               </Typography>
+              <IconButton onClick={onClick}>
+                {renderFavoriteButton()}
+              </IconButton>
             </Grid>
           </Grid>
         </Container>

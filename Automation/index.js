@@ -4,7 +4,8 @@ async function test1()
 {
     
     let driver = new Builder().forBrowser("chrome").build();
-    await driver.get("http://localhost:3000/recommendations");
-    await driver.findElement(By.linkText("Tell us your game preferences...")).sendKeys("Test",Keys.RETURN);
+    await driver.get("http://localhost:3000/home");
+    await driver.findElement(By.xpath("//input[@placeholder='Search games or tags']")).sendKeys("Test",Key.RETURN);
+    
 }
 test1();
