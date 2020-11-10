@@ -41,7 +41,7 @@ function DefaultLayout(props: Props) {
   };
 
   const goHome = () => {
-    history.push('/home')
+    history.push('/recommendations')
   }
 
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
@@ -68,7 +68,7 @@ function DefaultLayout(props: Props) {
             <Link to={`/favorites`}>
               <MenuItem onClick={handleClose} style={{ color: grey[800] }}>Favorites</MenuItem>
             </Link>
-            <Link to={`/home`}>
+            <Link to={`/recommendations`}>
               <MenuItem onClick={handleLogOut} style={{ color: grey[800] }}>Sign out</MenuItem>
             </Link>
           </MenuList>

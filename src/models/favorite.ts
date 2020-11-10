@@ -7,4 +7,9 @@ interface Favorite {
     slug: string;
 }
 
+export interface IsFavorite {
+    // eslint-disable-next-line camelcase
+    is_favorite: boolean;
+}
+
 export default Favorite;

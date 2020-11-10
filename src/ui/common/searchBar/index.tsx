@@ -13,9 +13,10 @@ const promiseOptions = (term: string) => new Promise((resolve) => {
 function SearchBar() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const onChange = (terms: any[]) => dispatch(
-    RootActions.UpdateSearchQuery((terms || []).map((t) => t.value)),
-  );
+  const onChange = (terms: any[]) => {
+    dispatch(RootActions.UpdateSearchQuery((terms || []).map((t) => t.value)));
+    history.push(`\recommendations`);
+  }
   return (
     <AsyncCreatable
       isMulti
@@ -26,7 +27,6 @@ function SearchBar() {
       components={{ DropdownIndicator: null }}
       placeholder="Tell us your game preferences..."
       classNamePrefix="searchBar"
-      onRequestSearch={() => history.push('/recommendations')}
     />
   );
 }
