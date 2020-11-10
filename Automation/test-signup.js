@@ -20,6 +20,7 @@ async function test2()
     await driver.findElement(By.name("password")).sendKeys("PAS$W0RD!",Key.RETURN);
     await driver.findElement(By.name("confirmpassword")).sendKeys("PAS$W0RD!",Key.RETURN);
 }
+
 async function test3()
 {
     
