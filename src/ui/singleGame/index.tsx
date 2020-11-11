@@ -1,5 +1,5 @@
 import {
-  Box, Chip, Container, Grid, GridList, GridListTile, Typography, IconButton
+  Box, Chip, Container, Grid, GridList, GridListTile, Typography, IconButton,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './index.scss';
@@ -8,28 +8,29 @@ import { useParams } from 'react-router';
 import {
   Label, Pie, PieChart, ResponsiveContainer,
 } from 'recharts';
-import { GameService } from '../../services';
+import { grey, yellow } from '@material-ui/core/colors';
+import StarIcon from '@material-ui/icons/Star';
+import { GameService, FavoriteService } from '../../services';
 import { Game } from '../../models';
 import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
-import { grey } from '@material-ui/core/colors';
-import { yellow } from '@material-ui/core/colors';
-import StarIcon from '@material-ui/icons/Star';
-import { FavoriteService } from '../../services';
 
 function SingleGame() {
   const { slug } = useParams<any>();
   const [game, setGame] = useState<Game>();
   const [hasError, setHasError] = useState(false);
-  let isFavorite: boolean = false;
+  const [favorite, setFavorite] = useState(false);
+  let btn = document.getElementById("favorite");
 
   useEffect(() => {
     GameService.detail(slug)
       .then((res) => setGame(res.data))
       .catch(() => setHasError(true));
-    
-    FavoriteService.isFavorite(slug, sessionStorage.getItem('username') || "")
-      .then((res) => isFavorite = res.data.is_favorite)
-      .catch(() => setHasError(true))
+
+    if (sessionStorage.getItem('username')) {
+      FavoriteService.isFavorite(slug, sessionStorage.getItem('username') || '')
+        .then((res) => setFavorite(res.data.is_favorite))
+        .catch(() => setHasError(true));
+    }
   }, [slug]);
   if (!game) {
     return <></>;
@@ -46,28 +47,28 @@ function SingleGame() {
 
   const onClick = (() => {
     if (sessionStorage.getItem('username')) {
-      var btn = document.getElementById("favorite");
-      if (btn != null) {
-        if (btn.style.color != yellow[500]) {
-          FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
+      if (btn !== null) {
+        if (!favorite) {
+          FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || '');
           btn.style.color = yellow[500];
+          setFavorite(true);
         } else {
-          FavoriteService.removeFavorite(slug, sessionStorage.getItem('username') || "");
+          FavoriteService.removeFavorite(slug, sessionStorage.getItem('username') || '');
           btn.style.color = grey[50];
+          setFavorite(false);
         }
       }
     } else {
-        alert("Create an account and login to add favorites.");
+      alert('Create an account and login to add favorites.');
     }
   });
 
   const renderFavoriteButton = () => {
-    if (isFavorite) {
-      return <StarIcon id="favorite" style={{ color: yellow[500] }}/>;
-    } else {
-      return <StarIcon id="favorite" style={{ color: grey[50] }}/>;
+    if (favorite) {
+      return <StarIcon id="favorite" style={{ color: yellow[500] }} />;
     }
-  }
+    return <StarIcon id="favorite" style={{ color: grey[50] }} />;
+  };
 
   return (
     <>

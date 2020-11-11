@@ -2,7 +2,7 @@ import ArtworkMatch from './artworkMatch';
 import { Game } from './game';
 import Recommendation from './recommendation';
 import Suggestion from './suggestion';
-import Favorite from './favorite';
+import Favorite, { IsFavorite } from './favorite';
 
 export type {
   ArtworkMatch,
@@ -10,4 +10,5 @@ export type {
   Recommendation,
   Suggestion,
   Favorite,
+  IsFavorite,
 };
