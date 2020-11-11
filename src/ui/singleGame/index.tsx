@@ -27,9 +27,11 @@ function SingleGame() {
       .then((res) => setGame(res.data))
       .catch(() => setHasError(true));
     
-    FavoriteService.isFavorite(slug, sessionStorage.getItem('username') || "")
-      .then((res) => setFavorite(res.data.is_favorite))
-      .catch(() => setHasError(true))
+    if(sessionStorage.getItem('username')) {
+      FavoriteService.isFavorite(slug, sessionStorage.getItem('username') || "")
+        .then((res) => setFavorite(res.data.is_favorite))
+        .catch(() => setHasError(true))
+    }
   }, [slug]);
   if (!game) {
     return <></>;
