@@ -48,7 +48,7 @@ function SingleGame() {
     if (sessionStorage.getItem('username')) {
       var btn = document.getElementById("favorite");
       if (btn !== null) {
-        if (btn.style.color != yellow[500]) {
+        if (btn.style.color !== yellow[500]) {
           FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
           btn.style.color = yellow[500];
         } else {
