@@ -64,60 +64,60 @@ function Signup() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                fullWidth
-                label="Email"
-                name="email"
-                size="small"
-                variant="outlined"
-                inputRef={register({
-                  required: 'Required',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'invalid email address',
-                  }
-                })}
+                  fullWidth
+                  label="Email"
+                  name="email"
+                  size="small"
+                  variant="outlined"
+                  inputRef={register({
+                    required: 'Required',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'invalid email address',
+                    },
+                  })}
                 />
                 <span className={classes.span}>{errors.email && errors.email.message}</span>
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                fullWidth
-                label="Username"
-                name="username"
-                size="small"
-                type="username"
-                variant="outlined"
-                inputRef={register({
-                  required: 'Required',
-                })}
+                  fullWidth
+                  label="Username"
+                  name="username"
+                  size="small"
+                  type="username"
+                  variant="outlined"
+                  inputRef={register({
+                    required: 'Required',
+                  })}
                 />
                 <span className={classes.span}>{errors.username && errors.username.message}</span>
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                fullWidth
-                label="Password"
-                name="password"
-                size="small"
-                type="password"
-                variant="outlined"
-                inputRef={register({
-                  required: 'Required',
-                })}
+                  fullWidth
+                  label="Password"
+                  name="password"
+                  size="small"
+                  type="password"
+                  variant="outlined"
+                  inputRef={register({
+                    required: 'Required',
+                  })}
                 />
                 <span className={classes.span}>{errors.password && errors.password.message}</span>
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                fullWidth
-                label="ConfirmPassword"
-                name="confirmpassword"
-                size="small"
-                type="password"
-                variant="outlined"
-                inputRef={register({
-                  required: 'Required',
-                })}
+                  fullWidth
+                  label="ConfirmPassword"
+                  name="confirmpassword"
+                  size="small"
+                  type="password"
+                  variant="outlined"
+                  inputRef={register({
+                    required: 'Required',
+                  })}
                 />
                 <span className={classes.span}>
                   {errors.confirmpassword && errors.confirmpassword.message}

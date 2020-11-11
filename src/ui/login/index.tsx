@@ -33,8 +33,8 @@ function Login() {
 			password: res.password,
 		}).then(
 			(result) => {
-				axiosInstance.defaults.headers.Authorization = `JWT ${result.data.access}`;
-				sessionStorage.setItem('access_token', result.data.access);
+			  axiosInstance.defaults.headers.Authorization = `JWT ${result.data.access}`;
+			  sessionStorage.setItem('access_token', result.data.access);
 				sessionStorage.setItem('refresh_token', result.data.refresh);
 				sessionStorage.setItem('username', res.username);
 				if (result.status === 200) {

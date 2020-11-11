@@ -143,10 +143,10 @@ function DefaultLayout(props: Props) {
                       {({ TransitionProps, placement }) => (
                         <Grow
                           {...TransitionProps}
-                          style={{ 
-                            transformOrigin: placement 
-                            === 'bottom' ? 'center top' : 'center bottom'
-                            }}
+                          style={{
+                            transformOrigin: placement
+                            === 'bottom' ? 'center top' : 'center bottom',
+                          }}
                         >
                           <Paper>
                             {renderProfileButton()}

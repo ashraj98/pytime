@@ -15,7 +15,7 @@ class FavoriteService {
   }
 
   public static getFavorites(username: string) {
-  return HttpClient.instance.post<Favorite[]>('favorites/get_favorites/', { username });
+    return HttpClient.instance.post<Favorite[]>('favorites/get_favorites/', { username });
   }
 }
 
