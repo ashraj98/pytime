@@ -44,7 +44,7 @@ function Signup() {
                     sessionStorage.setItem('access_token', result.data.access);
                     sessionStorage.setItem('refresh_token', result.data.refresh);
                     sessionStorage.setItem('username', data.username);
-                    if (result.status == 201) {
+                    if (result.status === 201) {
                         history.push('/recommendations');
                     }
             }).catch (error => {

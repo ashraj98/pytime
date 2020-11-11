@@ -20,7 +20,7 @@ function SingleGame() {
   const { slug } = useParams<any>();
   const [game, setGame] = useState<Game>();
   const [hasError, setHasError] = useState(false);
-  let isFavorite: boolean = false;
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     GameService.detail(slug)
@@ -28,7 +28,7 @@ function SingleGame() {
       .catch(() => setHasError(true));
     
     FavoriteService.isFavorite(slug, sessionStorage.getItem('username') || "")
-      .then((res) => isFavorite = res.data.is_favorite)
+      .then((res) => setFavorite(res.data.is_favorite))
       .catch(() => setHasError(true))
   }, [slug]);
   if (!game) {
@@ -47,7 +47,7 @@ function SingleGame() {
   const onClick = (() => {
     if (sessionStorage.getItem('username')) {
       var btn = document.getElementById("favorite");
-      if (btn != null) {
+      if (btn !== null) {
         if (btn.style.color != yellow[500]) {
           FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
           btn.style.color = yellow[500];
@@ -62,7 +62,7 @@ function SingleGame() {
   });
 
   const renderFavoriteButton = () => {
-    if (isFavorite) {
+    if (favorite) {
       return <StarIcon id="favorite" style={{ color: yellow[500] }}/>;
     } else {
       return <StarIcon id="favorite" style={{ color: grey[50] }}/>;
