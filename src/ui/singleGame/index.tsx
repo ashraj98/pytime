@@ -50,12 +50,14 @@ function SingleGame() {
     if (sessionStorage.getItem('username')) {
       var btn = document.getElementById("favorite");
       if (btn !== null) {
-        if (btn.style.color !== yellow[500]) {
+        if (!favorite) {
           FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || "");
           btn.style.color = yellow[500];
+          setFavorite(true);
         } else {
           FavoriteService.removeFavorite(slug, sessionStorage.getItem('username') || "");
           btn.style.color = grey[50];
+          setFavorite(false);
         }
       }
     } else {
