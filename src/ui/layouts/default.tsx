@@ -1,5 +1,5 @@
 import {
-  AppBar, Button, Grid, Toolbar, Typography, Popper, Grow, Paper, ClickAwayListener, 
+  AppBar, Button, Grid, Toolbar, Typography, Popper, Grow, Paper, ClickAwayListener,
   MenuList, MenuItem,
 } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -66,10 +66,10 @@ function DefaultLayout(props: Props) {
       return (
         <ClickAwayListener onClickAway={handleClose}>
           <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-            <Link to='/favorites'>
+            <Link to={`/favorites`}>
               <MenuItem onClick={handleClose} style={{ color: grey[800] }}>Favorites</MenuItem>
             </Link>
-            <Link to='/recommendations'>
+            <Link to={`/recommendations`}>
               <MenuItem onClick={handleLogOut} style={{ color: grey[800] }}>Sign out</MenuItem>
             </Link>
           </MenuList>
@@ -79,10 +79,10 @@ function DefaultLayout(props: Props) {
     return (
       <ClickAwayListener onClickAway={handleClose}>
         <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-          <Link to='/login'>
+          <Link to={`/login`}>
             <MenuItem onClick={handleClose} style={{ color: grey[800] }}>Sign in</MenuItem>
           </Link>
-          <Link to='/signup'>
+          <Link to={`/signup`}>
             <MenuItem onClick={handleClose} style={{ color: grey[800] }}>Sign up</MenuItem>
           </Link>
         </MenuList>
@@ -133,18 +133,20 @@ function DefaultLayout(props: Props) {
                       <PersonIcon style={{ color: grey[50] }} />
                       <ExpandMoreIcon style={{ color: grey[50] }} />
                     </Button>
-                    <Popper 
-                      open={open} 
-                      anchorEl={anchorRef.current} 
-                      role={undefined} 
-                      transition 
+                    <Popper
+                      open={open}
+                      anchorEl={anchorRef.current}
+                      role={undefined}
+                      transition
                       disablePortal
                     >
                       {({ TransitionProps, placement }) => (
                         <Grow
                           {...TransitionProps}
-                          style={{ transformOrigin: placement === 
-                            'bottom' ? 'center top' : 'center bottom' }}
+                          style={{ 
+                            transformOrigin: placement 
+                            === 'bottom' ? 'center top' : 'center bottom'
+                            }}
                         >
                           <Paper>
                             {renderProfileButton()}

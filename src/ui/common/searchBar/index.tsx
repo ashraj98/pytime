@@ -17,7 +17,6 @@ function SearchBar() {
     dispatch(RootActions.UpdateSearchQuery((terms || []).map((t) => t.value)));
     history.push(`/recommendations`);
   };
-  
   return (
     <AsyncCreatable
       isMulti

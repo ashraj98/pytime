@@ -38,8 +38,8 @@ function Login() {
 				sessionStorage.setItem('refresh_token', result.data.refresh);
 				sessionStorage.setItem('username', res.username);
 				if (result.status === 200) {
-					history.push('/recommendations');
-				}
+					history.push(`/recommendations`);
+			  }
 			},
 		).catch (
 			(error) => {
