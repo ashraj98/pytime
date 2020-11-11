@@ -29,7 +29,7 @@ function App() {
             <Route exact path="/favorites">
               <Favorites />
             </Route>
-            <Route exact path="/game/:slug">  
+            <Route exact path="/game/:slug">
               <SingleGame />
             </Route>
             <Route exact path="/login">
