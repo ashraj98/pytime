@@ -88,7 +88,7 @@ function DefaultLayout(props: Props) {
         </MenuList>
       </ClickAwayListener>
     );
-  }
+  };
 
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {

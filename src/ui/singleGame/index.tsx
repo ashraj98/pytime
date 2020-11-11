@@ -8,18 +8,18 @@ import { useParams } from 'react-router';
 import {
   Label, Pie, PieChart, ResponsiveContainer,
 } from 'recharts';
+import { grey, yellow } from '@material-ui/core/colors';
+import StarIcon from '@material-ui/icons/Star';
 import { GameService, FavoriteService } from '../../services';
 import { Game } from '../../models';
 import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
-import { grey, yellow } from '@material-ui/core/colors';
-import StarIcon from '@material-ui/icons/Star';
 
 function SingleGame() {
   const { slug } = useParams<any>();
   const [game, setGame] = useState<Game>();
   const [hasError, setHasError] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  var btn = document.getElementById("favorite");
+  let btn = document.getElementById("favorite");
 
   useEffect(() => {
     GameService.detail(slug)
@@ -59,7 +59,7 @@ function SingleGame() {
         }
       }
     } else {
-        alert("Create an account and login to add favorites.");
+      alert('Create an account and login to add favorites.');
     }
   });
 

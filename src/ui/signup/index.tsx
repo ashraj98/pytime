@@ -47,12 +47,13 @@ function Signup() {
           if (result.status === 201) {
             history.push('/recommendations');
           }
-        }
-      ).catch (
+        },
+      ).catch(
         (error) => {
           alert('Sign up failed, try different username or email');
           throw error;
-      });
+        }
+      );
     }
   });
 
