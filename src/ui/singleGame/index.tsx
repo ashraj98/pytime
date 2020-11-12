@@ -47,14 +47,16 @@ function SingleGame() {
 
   const onClick = (() => {
     if (sessionStorage.getItem('username')) {
-      btn = document.getElementById("favorite")
+      btn = document.getElementById('favorite');
       if (btn !== null) {
         if (!favorite) {
           FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || '');
+          // eslint-disable-next-line prefer-destructuring
           btn.style.color = yellow[500];
           setFavorite(true);
         } else {
           FavoriteService.removeFavorite(slug, sessionStorage.getItem('username') || '');
+          // eslint-disable-next-line prefer-destructuring
           btn.style.color = grey[50];
           setFavorite(false);
         }

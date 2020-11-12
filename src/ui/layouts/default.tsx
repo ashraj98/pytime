@@ -59,7 +59,6 @@ function DefaultLayout(props: Props) {
     }
     sessionStorage.removeItem('username');
     setOpen(false);
-    alert('You have successfully logged out');
   };
 
   const renderProfileButton = () => {
@@ -67,10 +66,10 @@ function DefaultLayout(props: Props) {
       return (
         <ClickAwayListener onClickAway={handleClose}>
           <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-            <Link to={`/favorites`}>
+            <Link to="/favorites">
               <MenuItem onClick={handleClose} style={{ color: grey[800] }}>Favorites</MenuItem>
             </Link>
-            <Link to={`/recommendations`}>
+            <Link to="/recommendations">
               <MenuItem onClick={handleLogOut} style={{ color: grey[800] }}>Sign out</MenuItem>
             </Link>
           </MenuList>
@@ -80,10 +79,10 @@ function DefaultLayout(props: Props) {
     return (
       <ClickAwayListener onClickAway={handleClose}>
         <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-          <Link to={`/login`}>
+          <Link to="/login">
             <MenuItem onClick={handleClose} style={{ color: grey[800] }}>Sign in</MenuItem>
           </Link>
-          <Link to={`/signup`}>
+          <Link to="/signup">
             <MenuItem onClick={handleClose} style={{ color: grey[800] }}>Sign up</MenuItem>
           </Link>
         </MenuList>
@@ -100,7 +99,7 @@ function DefaultLayout(props: Props) {
 
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
+    if (prevOpen.current && !open) {
       anchorRef.current!.focus();
     }
 

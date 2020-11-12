@@ -15,7 +15,7 @@ function SearchBar() {
   const history = useHistory();
   const onChange = (terms: any[]) => {
     dispatch(RootActions.UpdateSearchQuery((terms || []).map((t) => t.value)));
-    history.push(`/recommendations`);
+    history.push('/recommendations');
   };
   return (
     <AsyncCreatable

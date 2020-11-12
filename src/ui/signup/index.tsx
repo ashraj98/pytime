@@ -52,7 +52,7 @@ function Signup() {
         (error) => {
           alert('Sign up failed, try different username or email');
           throw error;
-        }
+        },
       );
     }
   });
