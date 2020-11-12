@@ -1,7 +1,8 @@
 language: node_js
 node_js: 14
-script:
+before_install:
   - cp -rf src/env/index.prod.ts src/env/index.ts
+script:
   - yarn run build
   - yarn run lint
   - yarn run test
