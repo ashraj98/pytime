@@ -59,6 +59,7 @@ function DefaultLayout(props: Props) {
     }
     sessionStorage.removeItem('username');
     setOpen(false);
+    alert('You have successfully logged out');
   };
 
   const renderProfileButton = () => {

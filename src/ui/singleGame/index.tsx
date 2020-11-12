@@ -19,7 +19,7 @@ function SingleGame() {
   const [game, setGame] = useState<Game>();
   const [hasError, setHasError] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  let btn = document.getElementById("favorite");
+  let btn = null;
 
   useEffect(() => {
     GameService.detail(slug)
@@ -47,6 +47,7 @@ function SingleGame() {
 
   const onClick = (() => {
     if (sessionStorage.getItem('username')) {
+      btn = document.getElementById("favorite")
       if (btn !== null) {
         if (!favorite) {
           FavoriteService.addFavorite(slug, sessionStorage.getItem('username') || '');
