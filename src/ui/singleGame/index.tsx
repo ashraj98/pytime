@@ -1,5 +1,5 @@
 import {
-  Box, Chip, Container, Grid, GridList, GridListTile, Typography, IconButton,
+  Box, Chip, Container, Grid, GridList, GridListTile, Typography, IconButton, Avatar
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './index.scss';
@@ -10,20 +10,20 @@ import {
 } from 'recharts';
 import { grey, yellow } from '@material-ui/core/colors';
 import StarIcon from '@material-ui/icons/Star';
-import { GameService, FavoriteService } from '../../services';
-import { Game } from '../../models';
-import { IGDBImageSize, IGDBUtils, ImageUtils } from '../common';
+import { ShowService, FavoriteService } from '../../services';
+import { Show } from '../../models';
+import { TMDBImageSize, TMDBUtils, ImageUtils } from '../common';
 
 function SingleGame() {
   const { slug } = useParams<any>();
-  const [game, setGame] = useState<Game>();
+  const [show, setShow] = useState<Show>();
   const [hasError, setHasError] = useState(false);
   const [favorite, setFavorite] = useState(false);
   let btn = null;
 
   useEffect(() => {
-    GameService.detail(slug)
-      .then((res) => setGame(res.data))
+    ShowService.detail(slug)
+      .then((res) => setShow(res.data))
       .catch(() => setHasError(true));
 
     if (sessionStorage.getItem('username')) {
@@ -32,16 +32,16 @@ function SingleGame() {
         .catch(() => setHasError(true));
     }
   }, [slug]);
-  if (!game) {
+  if (!show) {
     return <></>;
   }
   if (hasError) {
     return <></>;
   }
-  const userRating = Math.round(game.rating || 100);
-  const userAngleDelta = (100 / userRating - 1) * 180;
-  const heroBg = game.artworks ? ImageUtils.imageWithOverlay(
-    IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, game.artworks[0].image_id), 0.6,
+  const userRating = Math.round(show.vote_average || 10);
+  const userAngleDelta = (10 / userRating - 1) * 180;
+  const heroBg = show.backdrop_path ? ImageUtils.imageWithOverlay(
+    TMDBUtils.getTMDBImageSource(TMDBImageSize.Backdrop3, show.backdrop_path), 0.6,
   ) : 'black';
   const headerStyle = { background: heroBg };
 
@@ -78,19 +78,25 @@ function SingleGame() {
           <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
               <img
-                src={IGDBUtils.getIGDBImageSource(IGDBImageSize.CoverBig, game.cover.image_id)}
-                alt={game.cover.image_id}
+                src={TMDBUtils.getTMDBImageSource(TMDBImageSize.poster4, show.poster_path)}
+                alt={show.poster_path}
               />
             </Grid>
             <Grid item xs={12} md={8}>
-              <Typography variant="h1" component="h2">{game.name}</Typography>
+              <Typography variant="h1" component="h2">{show.name}</Typography>
               <Box style={{ paddingTop: 20 }}>
-                {game.themes?.map(
-                  (theme: any) => <Chip label={theme.name} key={theme.id} style={{ margin: 5 }} />,
+                {show.production_companies?.map(
+                  (company: any) => 
+                  <Chip 
+                    avatar = {<Avatar src = {TMDBUtils.getTMDBImageSource(TMDBImageSize.logo1, company.logo_path)} />}
+                    label={company.name} 
+                    key={company.id} 
+                    style={{ margin: 5 }} 
+                  />,
                 )}
               </Box>
               <Typography variant="h4" component="h2" style={{ paddingTop: 20 }}>
-                {`Released: ${new Date(game.release_dates[0].date * 1000).toLocaleDateString()}`}
+                {`Released: ${new Date(show.first_air_date).toLocaleDateString()}`}
               </Typography>
               <IconButton onClick={onClick}>
                 {renderFavoriteButton()}
@@ -105,10 +111,10 @@ function SingleGame() {
             <Grid item xs={12} md={6}>
               <Box>
                 <Typography variant="h3">About</Typography>
-                <p>{game.summary}</p>
+                <p>{show.overview}</p>
                 <span>
                   <b>Genres: </b>
-                  {game.genres?.map((g) => g.name).join(', ')}
+                  {show.genres?.map((g) => g.name).join(', ')}
                 </span>
               </Box>
               <Box style={{ paddingTop: 15 }}>
@@ -131,38 +137,27 @@ function SingleGame() {
                   </ResponsiveContainer>
                   <span>
                     <b>
-                      {`${game.rating_count} `}
+                      {`${show.vote_count} `}
                     </b>
                     User Ratings
                   </span>
                 </Box>
               </Box>
               <Box style={{ paddingTop: 50 }}>
-                <Typography variant="h3">Keywords</Typography>
-                {game.keywords?.map(
-                  (k: any) => <Chip label={k.name} key={k.id} style={{ margin: 5 }} />,
+                <Typography variant="h3">Languages</Typography>
+                {show.spoken_languages?.map(
+                  (l: any) => <Chip label={l.english_name} key={l.iso_639_1} style={{ margin: 5 }} />,
                 )}
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="h3">Trailer</Typography>
-              { game.videos?.length > 0 && (
-                <ReactPlayer
-                  url={IGDBUtils.getIGDBVideoURL(game.videos[0].video_id)}
-                  playing
-                  loop
-                  muted
-                  volume={0}
-                  width="100%"
-                />
-              )}
-              <Typography variant="h3" style={{ paddingTop: 20 }}>Screenshots</Typography>
-              <GridList cellHeight={160} cols={2}>
-                {game.screenshots.map((s) => (
+              <Typography variant="h3" style={{ paddingTop: 20 }}>Seasons</Typography>
+              <GridList cellHeight={380} cols={2}>
+                {show.seasons.map((s) => (
                   <GridListTile key={s.id} cols={1}>
                     <img
-                      src={IGDBUtils.getIGDBImageSource(IGDBImageSize.FullHD, s.image_id)}
-                      alt={s.image_id}
+                      src={TMDBUtils.getTMDBImageSource(TMDBImageSize.original, s.poster_path)}
+                      alt={s.poster_path}
                     />
                   </GridListTile>
                 ))}

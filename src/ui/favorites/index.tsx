@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import './index.scss';
 import { Favorite } from '../../models';
 import { FavoriteService } from '../../services';
-import { IGDBImageSize, IGDBUtils } from '../common';
+import { TMDBImageSize, TMDBUtils } from '../common';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -42,13 +42,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Album() {
-  const [games, setGames] = useState<Favorite[]>([]);
+  const [shows, setShows] = useState<Favorite[]>([]);
   const classes = useStyles();
 
   const username = sessionStorage.getItem('username') || '';
 
   useEffect(() => {
-    FavoriteService.getFavorites(username).then((res) => setGames(res.data));
+    FavoriteService.getFavorites(username).then((res) => setShows(res.data));
   }, [username]);
 
   return (
@@ -63,15 +63,15 @@ export default function Album() {
         </div>
         <div style={{ marginTop: 20, padding: 30 }}>
           <Grid container direction="row" spacing={5} justify="center">
-            {games.map((game) => (
-              <Grid item xs={3} key={game.name}>
-                <Link to={`/game/${game.slug}`}>
+            {shows.map((show) => (
+              <Grid item xs={3} key={show.name}>
+                <Link to={`/game/${show.slug}`}>
                   <Card>
                     <CardActionArea>
                       <CardMedia
                         component="img"
-                        image={IGDBUtils.getIGDBImageSource(
-                          IGDBImageSize.CoverBig, game.cover.image_id,
+                        image={TMDBUtils.getTMDBImageSource(
+                          TMDBImageSize.original, show.cover,
                         )}
                       />
                     </CardActionArea>

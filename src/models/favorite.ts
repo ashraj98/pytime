@@ -3,7 +3,7 @@ import { Cover } from './game';
 interface Favorite {
     name: string;
     summary: string;
-    cover: Cover;
+    cover: string;
     slug: string;
 }
 

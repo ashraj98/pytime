@@ -6,10 +6,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './index.scss';
-import { GameService } from '../../services';
+import { ShowService } from '../../services';
 import { Recommendation } from '../../models';
 import { RootState } from '../../store/types';
-import { IGDBImageSize, IGDBUtils } from '../common';
+import { TMDBImageSize, TMDBUtils } from '../common';
 import ArtworkMatch from '../../models/artworkMatch';
 
 const useStyles = makeStyles((theme) => ({
@@ -46,16 +46,16 @@ const useStyles = makeStyles((theme) => ({
 
 interface ArtworkData {
   image: string
-  size: IGDBImageSize
+  size: TMDBImageSize
   useTitle: boolean
 }
 
 type ArtworkMap = { [index:string] : ArtworkData };
 
 export default function Recommendations() {
-  const [games, setGames] = useState<Recommendation[]>([]);
+  const [shows, setShows] = useState<Recommendation[]>([]);
   const [artworks, setArtworks] = useState<ArtworkMatch[]>([]);
-  const [gameImages, setGameImages] = useState<ArtworkMap>({});
+  const [showImages, setShowImages] = useState<ArtworkMap>({});
   const [processing, setProcessing] = useState<boolean>(true);
   const classes = useStyles();
 
@@ -63,31 +63,31 @@ export default function Recommendations() {
 
   useEffect(() => {
     setProcessing(true);
-    GameService.getRecommendations(searchTerms).then((res) => setGames(res.data));
+    ShowService.getRecommendations(searchTerms).then((res) => setShows(res.data));
   }, [searchTerms]);
 
   useEffect(() => {
-    if (games.length > 0 && searchTerms.length > 0) {
-      const gameSlugs = games.map((g) => g.slug);
-      GameService.coverArt(gameSlugs, searchTerms).then((res) => setArtworks(res.data));
+    if (shows.length > 0 && searchTerms.length > 0) {
+      const gameSlugs = shows.map((g) => g.slug);
+      ShowService.coverArt(gameSlugs, searchTerms).then((res) => setArtworks(res.data));
     }
-  }, [games, searchTerms]);
+  }, [shows, searchTerms]);
 
   useEffect(() => {
     const artworkMap:ArtworkMap = {};
-    games.forEach((game) => {
-      const art = artworks.find((am) => am.game === game.slug);
+    shows.forEach((show) => {
+      const art = artworks.find((am) => am.game === show.slug);
       if (art) {
-        artworkMap[game.slug] = { image: art.image, size: IGDBImageSize.FullHD, useTitle: true };
+        artworkMap[show.slug] = { image: art.image, size: TMDBImageSize.original, useTitle: true };
       } else {
-        artworkMap[game.slug] = {
-          image: game.cover.image_id, size: IGDBImageSize.CoverBig, useTitle: false,
+        artworkMap[show.slug] = {
+          image: show.cover, size: TMDBImageSize.original, useTitle: false,
         };
       }
     });
-    setGameImages(artworkMap);
+    setShowImages(artworkMap);
     setProcessing(false);
-  }, [games, artworks]);
+  }, [shows, artworks]);
 
   if (processing) return <></>;
 
@@ -97,21 +97,21 @@ export default function Recommendations() {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Game Recommendations
+              Show Recommendations
             </Typography>
           </Container>
         </div>
         <div style={{ marginTop: 20, padding: 30 }}>
           <Grid container direction="row" spacing={5} justify="center">
-            {games.map((game) => (
-              <Grid item xs={3} key={game.name}>
-                <Link to={`/game/${game.slug}`}>
+            {shows.map((show) => (
+              <Grid item xs={3} key={show.slug}>
+                <Link to={`/game/${show.slug}`}>
                   <Card>
-                    { gameImages[game.slug]?.useTitle && <CardHeader title={game.name} /> }
+                    { showImages[show.slug]?.useTitle && <CardHeader title={show.slug} /> }
                     <CardMedia
                       component="img"
-                      image={IGDBUtils.getIGDBImageSource(
-                        gameImages[game.slug]?.size, gameImages[game.slug]?.image,
+                      image={TMDBUtils.getTMDBImageSource(
+                        showImages[show.slug]?.size, showImages[show.slug]?.image,
                       )}
                     />
                   </Card>

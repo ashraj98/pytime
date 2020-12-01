@@ -1,10 +1,10 @@
-import IGDBUtils, { IGDBImageSize } from './igdbUtils';
+import TMDBUtils, { TMDBImageSize } from './tmdbUtils';
 import ImageUtils from './imageUtils';
 import SearchBar from './searchBar';
 
 export {
-  IGDBImageSize,
-  IGDBUtils,
+  TMDBImageSize,
+  TMDBUtils,
   ImageUtils,
   SearchBar,
 };

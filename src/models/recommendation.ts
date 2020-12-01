@@ -1,9 +1,6 @@
-import { Cover } from './game';
-
 interface Recommendation {
-    name: string;
     summary: string;
-    cover: Cover;
+    cover: string;
     slug: string;
 }
 
