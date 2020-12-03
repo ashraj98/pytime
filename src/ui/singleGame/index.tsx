@@ -3,7 +3,6 @@ import {
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './index.scss';
-import ReactPlayer from 'react-player';
 import { useParams } from 'react-router';
 import {
   Label, Pie, PieChart, ResponsiveContainer,
@@ -11,7 +10,7 @@ import {
 import { grey, yellow } from '@material-ui/core/colors';
 import StarIcon from '@material-ui/icons/Star';
 import { ShowService, FavoriteService } from '../../services';
-import { Show, Seasons } from '../../models';
+import { Show } from '../../models';
 import { TMDBImageSize, TMDBUtils, ImageUtils } from '../common';
 
 function SingleGame() {

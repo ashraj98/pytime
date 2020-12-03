@@ -3,7 +3,7 @@ import { Game } from './game';
 import Recommendation from './recommendation';
 import Suggestion from './suggestion';
 import Favorite, { IsFavorite } from './favorite';
-import { Show, Seasons } from './show';
+import { Show } from './show';
 
 export type {
   ArtworkMatch,
@@ -13,5 +13,4 @@ export type {
   Favorite,
   IsFavorite,
   Show,
-  Seasons,
 };
