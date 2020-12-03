@@ -11,7 +11,7 @@ import {
 import { grey, yellow } from '@material-ui/core/colors';
 import StarIcon from '@material-ui/icons/Star';
 import { ShowService, FavoriteService } from '../../services';
-import { Show } from '../../models';
+import { Show, Seasons } from '../../models';
 import { TMDBImageSize, TMDBUtils, ImageUtils } from '../common';
 
 function SingleGame() {
@@ -153,14 +153,17 @@ function SingleGame() {
             <Grid item xs={12} md={6}>
               <Typography variant="h3" style={{ paddingTop: 20 }}>Seasons</Typography>
               <GridList cellHeight={380} cols={2}>
-                {show.seasons.map((s) => (
-                  <GridListTile key={s.id} cols={1}>
-                    <img
-                      src={TMDBUtils.getTMDBImageSource(TMDBImageSize.original, s.poster_path)}
-                      alt={s.poster_path}
-                    />
-                  </GridListTile>
-                ))}
+                {show.seasons.map(function(s) {
+                  if (s.poster_path != null)
+                    return (
+                      <GridListTile key={s.id} cols={1}>
+                        <img
+                          src={TMDBUtils.getTMDBImageSource(TMDBImageSize.original, s.poster_path)}
+                          alt={s.poster_path}
+                        />
+                      </GridListTile>
+                    )
+                })}
               </GridList>
             </Grid>
           </Grid>

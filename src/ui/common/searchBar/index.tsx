@@ -25,7 +25,7 @@ function SearchBar() {
       loadOptions={promiseOptions}
       onChange={onChange}
       components={{ DropdownIndicator: null }}
-      placeholder="Search our game library..."
+      placeholder="Search our show library..."
       classNamePrefix="searchBar"
     />
   );
